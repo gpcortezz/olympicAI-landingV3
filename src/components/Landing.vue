@@ -3,50 +3,26 @@
     <!-- Futuristic circular background -->
     <div class="fixed inset-0 z-0 bg-black pointer-events-none">
       <!-- Fondo azul translúcido en vez de negro -->
-      <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(36,80,180,0.38) 0%, rgba(27,112,117,0.22) 100%);"></div>
+      <!-- <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(36,80,180,0.38) 0%, rgba(27,112,117,0.22) 100%);"></div> -->
       <!-- Overlay blanco/azul claro para iluminar -->
       <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(255,255,255,0.10) 0%, rgba(200,230,255,0.08) 100%);"></div>
       <!-- Gradiente radial claro en el centro -->
-      <div class="absolute inset-0" style="background: radial-gradient(circle at 55% 55%, rgba(255,255,255,0.18) 0%, transparent 60%);"></div>
+      <!-- <div class="absolute inset-0" style="background: radial-gradient(circle at 55% 55%, rgba(255,255,255,0.18) 0%, transparent 60%);"></div> -->
       <!-- Blobs/Manchas difuminadas -->
-      <div class="absolute bg-blur" style="top: 10%; left: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(27, 112, 117, 0.48) 0%, transparent 70%); border-radius: 50%; filter: blur(8px);"></div>
-      <div class="absolute bg-blur" style="top: 60%; left: 15%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(39, 196, 121, 0.38) 0%, transparent 70%); border-radius: 50%; filter: blur(12px);"></div>
-      <div class="absolute bg-blur" style="top: 10%; right: 5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(12, 68, 65, 0.38) 0%, transparent 70%); border-radius: 50%; filter: blur(12px);"></div>
-      <div class="absolute bg-blur" style="bottom: 10%; right: 20%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(27, 112, 117, 0.32) 0%, transparent 70%); border-radius: 50%; filter: blur(14px);"></div>
-      <div class="absolute bg-blur" style="bottom: 20%; right: 8%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(39, 196, 121, 0.28) 0%, transparent 70%); border-radius: 50%; filter: blur(16px);"></div>
-      
+
       <!-- Large background circles -->
       <div class="absolute inset-0">
         <!-- Main large circle -->
         <div class="absolute" style="top: -20%; right: -10%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(27, 112, 117, 0.15) 0%, rgba(12, 68, 65, 0.08) 30%, transparent 70%); border-radius: 50%; transform: scale(1.2); animation: rotate-slow 60s linear infinite;"></div>
 
         <!-- Small accent circles -->
-        <div class="absolute" style="top: 10%; right: 20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(27, 112, 117, 0.18) 0%, rgba(12, 68, 65, 0.08) 50%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
-        <div class="absolute" style="bottom: 20%; left: 10%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(39, 196, 121, 0.14) 0%, rgba(27, 112, 117, 0.06) 50%, transparent 70%); border-radius: 50%; animation: pulse-glow 10s ease-in-out infinite reverse;"></div>
-        <div class="absolute" style="top: 60%; right: 5%; width: 100px; height: 100px; background: radial-gradient(circle, rgba(12, 68, 65, 0.2) 0%, rgba(27, 112, 117, 0.1) 40%, transparent 60%); border-radius: 50%; animation: float 8s ease-in-out infinite;"></div>
       </div>
       
       <!-- Floating particles/dots -->
-      <div class="absolute inset-0">
-        <div class="absolute animate-pulse" style="top: 15%; left: 25%; width: 3px; height: 3px; background: #27c479; border-radius: 50%; box-shadow: 0 0 10px rgba(39, 196, 121, 0.8);"></div>
-        <div class="absolute animate-pulse" style="top: 40%; right: 30%; width: 2px; height: 2px; background: #34a059; border-radius: 50%; box-shadow: 0 0 8px rgba(52, 160, 89, 0.6); animation-delay: 1s;"></div>
-        <div class="absolute animate-pulse" style="bottom: 30%; left: 40%; width: 4px; height: 4px; background: #27c479; border-radius: 50%; box-shadow: 0 0 12px rgba(39, 196, 121, 0.9); animation-delay: 2s;"></div>
-        <div class="absolute animate-pulse" style="top: 70%; right: 45%; width: 2px; height: 2px; background: #1b7075; border-radius: 50%; box-shadow: 0 0 6px rgba(27, 112, 117, 0.7); animation-delay: 0.5s;"></div>
-        <div class="absolute animate-pulse" style="top: 25%; right: 60%; width: 3px; height: 3px; background: #27c479; border-radius: 50%; box-shadow: 0 0 10px rgba(39, 196, 121, 0.8); animation-delay: 1.5s;"></div>
-      </div>
+
       
       <!-- Floating background images (faded) -->
-      <div class="absolute inset-0 overflow-hidden">
-        <!-- Asterisco elements -->
-        <img :src="asterisco" alt="" class="absolute opacity-5 object-contain animate-float decor-img" style="top: 20%; right: 15%; filter: sepia(100%) saturate(200%) hue-rotate(90deg); animation: float 12s ease-in-out infinite;" />
-        <img :src="asterisco" alt="" class="absolute opacity-3 object-contain animate-float decor-img" style="bottom: 25%; left: 20%; filter: sepia(100%) saturate(200%) hue-rotate(90deg); animation: float 15s ease-in-out infinite reverse;" />
-        <img :src="asterisco" alt="" class="absolute opacity-4 object-contain animate-float decor-img" style="top: 60%; right: 70%; filter: sepia(100%) saturate(200%) hue-rotate(90deg); animation: float 18s ease-in-out infinite;" />
-        
 
-        <!-- Additional asterisco elements for depth -->
-        <img :src="asterisco" alt="" class="absolute opacity-3 object-contain animate-float decor-img" style="bottom: 10%; right: 5%; filter: sepia(100%) saturate(200%) hue-rotate(90deg); animation: rotate-slow 80s linear infinite;" />
-        <img :src="asterisco" alt="" class="absolute opacity-2 object-contain animate-float decor-img" style="top: 80%; left: 5%; filter: sepia(100%) saturate(200%) hue-rotate(90deg); animation: float 22s ease-in-out infinite reverse;" />
-      </div>
       
       <!-- Overlay texture pattern -->
       <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, rgba(27, 112, 117, 0.2) 1px, transparent 0); background-size: 25px 25px;"></div>
