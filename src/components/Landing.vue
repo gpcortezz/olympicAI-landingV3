@@ -51,8 +51,10 @@
       <!-- Overlay texture pattern -->
       <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, rgba(27, 112, 117, 0.2) 1px, transparent 0); background-size: 25px 25px;"></div>
       
-      <!-- Content area fade -->
-      <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to right, rgba(27, 112, 117, 0.4) 0%, rgba(12, 68, 65, 0.2) 40%, transparent 80%);"></div>
+      <!-- Background texture overlay -->
+      <div class="absolute inset-0 pointer-events-none">
+        <img :src="backgroundTexture" alt="" class="w-full h-full object-cover opacity-20" />
+      </div>
     </div>
     
     <!-- Main content with custom grid -->
@@ -133,7 +135,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import asteriscoImg from '../assets/img/asterisco.png'
-import trophyImg from '../assets/img/trophy.png'
+import backgroundTextureImg from '../assets/img/background-no-texture.png'
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
 const eventDateTime = '2025-10-01T18:00:00'
@@ -159,7 +161,7 @@ let timer = null
 
 // Background images references
 const asterisco = asteriscoImg
-const trophy = trophyImg
+const backgroundTexture = backgroundTextureImg
 
 // Function to update countdown
 const updateCountdown = () => {
