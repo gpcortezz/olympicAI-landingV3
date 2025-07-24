@@ -28,18 +28,20 @@
           <!-- Main title - div6 -->
           <div class="main-title">
             <h1 class="text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
-              <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">Olimpiadas </span>
-              <span style="color: #27c479; text-shadow: 0 0 30px rgba(39, 196, 121, 0.8);">PRODUCT</span><br>
-              <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">KEYNOTE </span>
-              <span style="color: #27c479; text-shadow: 0 0 30px rgba(39, 196, 121, 0.8);">2023</span>
+              <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">OLIMPIADAS </span>
+              <span style="color: #27c479; text-shadow: 0 0 30px rgba(39, 196, 121, 0.8);">UNIVERSITARIAS</span><br>
+              <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">DE </span>
+              <span style="color: #27c479; text-shadow: 0 0 30px rgba(39, 196, 121, 0.8);">IA </span>
+              <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">2025</span>
             </h1>
           </div>
 
           <!-- Description - div7 -->
           <div class="description">
-            <p class="text-xl lg:text-2xl leading-relaxed max-w-xl" style="color: #ffffff; opacity: 0.9; text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);">
-              Travaillez ensemble en temps réel et offrez aux designers de nouvelles 
-              façons de créer. Maintenez l'efficacité des workflows grâce à
+            <p class="text-xl lg:text-2xl leading-relaxed max-w-3xl" style="color: #ffffff; opacity: 0.9; text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);">
+              Compite con los mejores estudiantes universitarios en desafíos de 
+              inteligencia artificial. Demuestra tus habilidades en machine learning,
+              algoritmos y soluciones innovadoras.
             </p>
           </div>
 
@@ -211,74 +213,114 @@ onUnmounted(() => {
     gap: 12px 0;
     justify-items: center;
   }
-  .date-card {
-    grid-column: 1;
-    grid-row: 1;
-    margin-bottom: 0.5rem;
-    justify-content: center;
-  }
   .logo-container {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1;
     justify-content: flex-start;
   }
   .main-title {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 2;
     justify-content: flex-start;
     text-align: left;
   }
   .description {
     grid-column: 1;
-    grid-row: 4;
+    grid-row: 3;
     justify-content: flex-start;
     text-align: left;
   }
+  .countdown-container {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    display: flex;
+    animation: none;
+    margin-top: 1rem;
+  }
   .countdown-grid {
-    grid-column: 1;
-    grid-row: 5;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px 10px;
-    margin-top: 1rem;
+    margin-top: 0;
     justify-self: center;
   }
 }
 
 @media (max-width: 640px) {
   .grid-container {
-    gap: 8px 0;
+    justify-items: center !important;
+  }
+  .main-title,
+  .description {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .countdown-container {
+    justify-content: center !important;
+    display: flex !important;
+    width: 100% !important;
+  }
+  .countdown-grid {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-container {
     padding: 0 0.5rem;
   }
   .logo-image {
-    height: 60px;
+    height: 48px !important;
   }
   .main-title h1 {
-    font-size: 2rem !important;
-    line-height: 2.4rem !important;
+    font-size: 1.3rem !important;
+    line-height: 1.7rem !important;
   }
   .description p {
-    font-size: 1rem !important;
-    line-height: 1.4rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.2rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .countdown-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    overflow-x: unset !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    grid-template-columns: unset !important;
+    grid-template-rows: unset !important;
+    grid-template-areas: unset !important;
   }
   .countdown-card {
-    min-width: 70px;
-    padding: 12px 6px;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    padding: 6px 2px !important;
   }
-  .date-card > div {
-    padding: 10px 8px !important;
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 1.1rem !important;
+    line-height: 1.3rem !important;
   }
-  .countdown-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: repeat(4, 1fr) !important;
-    gap: 6px 0 !important;
+  .countdown-card .text-sm {
+    font-size: 0.7rem !important;
+    line-height: 1rem !important;
   }
 }
-@media (min-width: 641px) and (max-width: 1023px) {
-  .countdown-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
-    grid-template-rows: 1fr !important;
-    gap: 10px 10px !important;
+
+@media (max-width: 640px) {
+  .description p {
+    max-width: 320px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
@@ -533,5 +575,103 @@ button, .action-buttons button {
   filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.9)) 
           drop-shadow(0 0 20px rgba(39, 196, 121, 0.5))
           brightness(1.05);
+}
+
+@media (max-width: 768px) {
+  .countdown-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 1.5rem 0 0 0 !important;
+    grid-column: unset !important;
+    grid-row: unset !important;
+    justify-content: unset !important;
+    align-items: unset !important;
+  }
+  .countdown-grid {
+    width: 100% !important;
+    margin: 0 auto !important;
+    grid-column: unset !important;
+    grid-row: unset !important;
+    justify-self: unset !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-container,
+  .main-title,
+  .description,
+  .countdown-container {
+    grid-column: unset !important;
+    grid-row: unset !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 6px !important;
+    width: 100vw !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    grid-template-columns: unset !important;
+    grid-template-rows: unset !important;
+    grid-template-areas: unset !important;
+  }
+  .countdown-card {
+    min-width: 90px !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  .main,
+  .grid-container,
+  .countdown-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.22) 0%, rgba(27, 112, 117, 0.13) 100%) !important;
+    border: 2.5px solid #27c479 !important;
+    box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+</style>
+
+<style>
+/* Asegura que html, body y #app ocupen todo el alto */
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* El div raíz debe ocupar todo el alto */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Centrado del main */
+main {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
 }
 </style>
