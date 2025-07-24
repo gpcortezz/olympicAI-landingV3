@@ -2,28 +2,10 @@
   <div class="min-h-screen relative flex flex-col">
     <!-- Futuristic circular background -->
     <div class="fixed inset-0 z-0 bg-black pointer-events-none">
-      <!-- Fondo azul translúcido en vez de negro -->
-      <!-- <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(36,80,180,0.38) 0%, rgba(27,112,117,0.22) 100%);"></div> -->
-      <!-- Overlay blanco/azul claro para iluminar -->
       <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(255,255,255,0.10) 0%, rgba(200,230,255,0.08) 100%);"></div>
-      <!-- Gradiente radial claro en el centro -->
-      <!-- <div class="absolute inset-0" style="background: radial-gradient(circle at 55% 55%, rgba(255,255,255,0.18) 0%, transparent 60%);"></div> -->
-      <!-- Blobs/Manchas difuminadas -->
-
-      <!-- Large background circles -->
       <div class="absolute inset-0">
-        <!-- Main large circle -->
         <div class="absolute" style="top: -20%; right: -10%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(27, 112, 117, 0.15) 0%, rgba(12, 68, 65, 0.08) 30%, transparent 70%); border-radius: 50%; transform: scale(1.2); animation: rotate-slow 60s linear infinite;"></div>
-
-        <!-- Small accent circles -->
       </div>
-      
-      <!-- Floating particles/dots -->
-
-      
-      <!-- Floating background images (faded) -->
-
-      
       <!-- Overlay texture pattern -->
       <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, rgba(27, 112, 117, 0.2) 1px, transparent 0); background-size: 25px 25px;"></div>
       
@@ -37,16 +19,10 @@
     <main class="relative z-10 px-3 flex-1 flex items-center justify-center">
       <div class="max-w-screen-xl mx-auto w-full h-full flex items-center justify-center">
         <div class="grid-container">
-          <!-- Date card - div4 -->
-          <div class="date-card">
-            <div class="rounded-lg p-4 shadow-lg h-fit" style="border: 2px solid #27c479; background: linear-gradient(135deg, rgba(39, 196, 121, 0.1) 0%, rgba(27, 112, 117, 0.08) 100%); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(39, 196, 121, 0.3);">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-black" style="color: #27c479;">19</div>
-                <div class="text-3xl font-bold text-black" style="color: #27c479;">20</div>
-                <div class="text-sm font-medium text-gray-600 mt-0.5" style="color: #34a059;">JANV.</div>
-                <div class="text-base font-bold text-black" style="color: #27c479;">2023</div>
-              </div>
-            </div>
+
+          <!-- Logo - arriba de los textos -->
+          <div class="logo-container">
+            <img :src="newLogoImg" alt="Logo" class="logo-image" />
           </div>
 
           <!-- Main title - div6 -->
@@ -67,39 +43,40 @@
             </p>
           </div>
 
-
           <!-- Countdown timer cards - lado derecho -->
-          <div class="countdown-grid">
-            <!-- Días -->
-            <div class="countdown-card countdown-card--main" style="grid-area: dias;">
-              <div class="text-4xl lg:text-5xl font-bold font-mono">
-                {{ countdown.days }}
+          <div class="countdown-container">
+            <div class="countdown-grid">
+              <!-- Días -->
+              <div class="countdown-card countdown-card--main" style="grid-area: dias;">
+                <div class="text-4xl lg:text-5xl font-bold font-mono">
+                  {{ countdown.days }}
+                </div>
+                <div class="text-sm text-white opacity-70 mt-2">Días</div>
               </div>
-              <div class="text-sm text-white opacity-70 mt-2">Días</div>
-            </div>
-            
-            <!-- Horas -->
-            <div class="countdown-card countdown-card--light countdown-card--up md:translate-y-[-20px]" style="grid-area: horas;">
-              <div class="text-4xl lg:text-5xl font-bold font-mono">
-                {{ countdown.hours }}
+              
+              <!-- Horas -->
+              <div class="countdown-card countdown-card--light countdown-card--up md:translate-y-[-20px]" style="grid-area: horas;">
+                <div class="text-4xl lg:text-5xl font-bold font-mono">
+                  {{ countdown.hours }}
+                </div>
+                <div class="text-sm text-white opacity-70 mt-2">Horas</div>
               </div>
-              <div class="text-sm text-white opacity-70 mt-2">Horas</div>
-            </div>
-            
-            <!-- Minutos -->
-            <div class="countdown-card countdown-card--light" style="grid-area: minutos;">
-              <div class="text-4xl lg:text-5xl font-bold font-mono">
-                {{ countdown.minutes }}
+              
+              <!-- Minutos -->
+              <div class="countdown-card countdown-card--light" style="grid-area: minutos;">
+                <div class="text-4xl lg:text-5xl font-bold font-mono">
+                  {{ countdown.minutes }}
+                </div>
+                <div class="text-sm text-white opacity-70 mt-2">Minutos</div>
               </div>
-              <div class="text-sm text-white opacity-70 mt-2">Minutos</div>
-            </div>
-            
-            <!-- Segundos -->
-            <div class="countdown-card countdown-card--light countdown-card--up md:translate-y-[-20px]" style="grid-area: segundos;">
-              <div class="text-4xl lg:text-5xl font-bold font-mono">
-                {{ countdown.seconds }}
+              
+              <!-- Segundos -->
+              <div class="countdown-card countdown-card--light countdown-card--up md:translate-y-[-20px]" style="grid-area: segundos;">
+                <div class="text-4xl lg:text-5xl font-bold font-mono">
+                  {{ countdown.seconds }}
+                </div>
+                <div class="text-sm text-white opacity-70 mt-2">Segundos</div>
               </div>
-              <div class="text-sm text-white opacity-70 mt-2">Segundos</div>
             </div>
           </div>
         </div>
@@ -110,11 +87,11 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import asteriscoImg from '../assets/img/asterisco.png'
 import backgroundTextureImg from '../assets/img/background-no-texture.png'
+import newLogoImg from '../assets/img/newLogo.png'
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-10-01T18:00:00'
+const eventDateTime = '2025-09-18T18:00:00'
 
 // Countdown timer state
 const countdown = ref({
@@ -124,19 +101,9 @@ const countdown = ref({
   seconds: '00'
 })
 
-// Date display for the event
-const eventDate = ref({
-  day1: '00',
-  day2: '00',
-  month: 'JAN',
-  year: '2024'
-})
-
 // Timer for countdown
 let timer = null
 
-// Background images references
-const asterisco = asteriscoImg
 const backgroundTexture = backgroundTextureImg
 
 // Function to update countdown
@@ -144,17 +111,6 @@ const updateCountdown = () => {
   // Usa la variable eventDateTime como fecha objetivo
   const now = new Date()
   const targetDate = new Date(eventDateTime)
-  
-  // Update event date display
-  const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 
-                     'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-  const eventDay = targetDate.getDate()
-  eventDate.value = {
-    day1: String(Math.floor(eventDay / 10)),
-    day2: String(eventDay % 10),
-    month: monthNames[targetDate.getMonth()],
-    year: String(targetDate.getFullYear())
-  }
   
   const diff = targetDate.getTime() - now.getTime()
   
@@ -210,6 +166,17 @@ onUnmounted(() => {
   to { transform: rotate(360deg); }
 }
 
+@keyframes logo-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 8px rgba(39, 196, 121, 0.5)) 
+            drop-shadow(0 0 15px rgba(39, 196, 121, 0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.8)) 
+            drop-shadow(0 0 20px rgba(39, 196, 121, 0.4));
+  }
+}
+
 /* Floating animation for images */
 .animate-float {
   animation: float 8s ease-in-out infinite;
@@ -224,7 +191,7 @@ onUnmounted(() => {
 .grid-container {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
   gap: 24px 40px;
   height: fit-content;
   width: 100%;
@@ -240,7 +207,7 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
     gap: 12px 0;
     justify-items: center;
   }
@@ -250,21 +217,26 @@ onUnmounted(() => {
     margin-bottom: 0.5rem;
     justify-content: center;
   }
-  .main-title {
+  .logo-container {
     grid-column: 1;
     grid-row: 2;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+  }
+  .main-title {
+    grid-column: 1;
+    grid-row: 3;
+    justify-content: flex-start;
+    text-align: left;
   }
   .description {
     grid-column: 1;
-    grid-row: 3;
-    justify-content: center;
-    text-align: center;
+    grid-row: 4;
+    justify-content: flex-start;
+    text-align: left;
   }
   .countdown-grid {
     grid-column: 1;
-    grid-row: 4;
+    grid-row: 5;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px 10px;
@@ -277,6 +249,9 @@ onUnmounted(() => {
   .grid-container {
     gap: 8px 0;
     padding: 0 0.5rem;
+  }
+  .logo-image {
+    height: 60px;
   }
   .main-title h1 {
     font-size: 2rem !important;
@@ -367,6 +342,15 @@ onUnmounted(() => {
   }
 }
 
+@keyframes countdown-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
 .date-card:hover > div {
   transform: scale(1.05);
   box-shadow: 0 12px 40px rgba(39, 196, 121, 0.5) !important;
@@ -375,30 +359,38 @@ onUnmounted(() => {
 
 .subtitle {
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 2;
   display: flex;
   align-items: center;
 }
 
 .main-title {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 3;
   display: flex;
   align-items: center;
 }
 
 .description {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 4;
   display: flex;
   align-items: center;
 }
 
 .action-buttons {
   grid-column: 2;
-  grid-row: 4;
+  grid-row: 5;
   display: flex;
   align-items: center;
+}
+
+.countdown-container {
+  grid-column: 3;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  animation: countdown-float 5s ease-in-out infinite;
 }
 
 .countdown-grid {
@@ -515,5 +507,31 @@ button, .action-buttons button {
 .countdown-card--light .font-mono {
   color: #f5f7fa !important;
   text-shadow: 0 0 18px rgb(250, 245, 245);
+}
+
+.logo-container {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+
+.logo-image {
+  height: 100px; /* Aumenté el tamaño temporalmente */
+  width: auto;
+  object-fit: contain;
+  animation: logo-glow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.9)) 
+          drop-shadow(0 0 20px rgba(39, 196, 121, 0.5))
+          brightness(1.05);
 }
 </style>
