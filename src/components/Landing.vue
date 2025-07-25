@@ -11,6 +11,7 @@
       
       <!-- Background texture overlay -->
       <div class="absolute inset-0 pointer-events-none">
+        <div id="light"></div>
         <img :src="backgroundTexture" alt="" class="w-full h-full object-cover opacity-20" />
       </div>
     </div>
@@ -91,6 +92,81 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import backgroundTextureImg from '../assets/img/background-no-texture.png'
 import newLogoImg from '../assets/img/newLogo.png'
+import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/+esm";
+import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
+
+(async () => {
+	await loadAll(tsParticles);
+
+	await tsParticles.addPreset("lightdark", {
+		fullScreen: {
+			enable: true,
+			zIndex: 1
+		},
+		particles: {
+			links: {
+				enable: true
+			},
+			move: {
+				enable: true
+			},
+			number: {
+				value: 25,
+				density: {
+					enable: true,
+					area: 200
+				}
+			},
+			opacity: {
+				value: { min: 0.005, max: 0.005 }
+			},
+			shape: {
+				type: ["circle", "square", "triangle", "polygon"],
+				options: {
+					polygon: [
+						{
+							sides: 5
+						},
+						{
+							sides: 6
+						},
+						{
+							sides: 8
+						}
+					]
+				}
+			},
+			size: {
+				value: { min: 1, max: 1 }
+			}
+		}
+	});
+
+	await tsParticles.load({
+		id: "light",
+		options: {
+			preset: "lightdark",
+			particles: {
+				color: {
+					value: ["#27c479", "#4ade80", "#1b7069"]
+				},
+				links: {
+					color: "#27c479",
+					opacity: 0.08,
+					width: 2
+				},
+				size: {
+					value: { min: 2, max: 5 }
+				},
+				opacity: {
+					value: { min: 0.050, max: 0.3 }
+				}
+			}
+		}
+	});
+
+
+})();
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
 const eventDateTime = '2025-09-18T18:00:00'
@@ -673,5 +749,23 @@ main {
   align-items: center !important;
   justify-content: center !important;
   min-height: 100vh !important;
+}
+
+#light {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+#light canvas {
+	background-color: transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
 }
 </style>
