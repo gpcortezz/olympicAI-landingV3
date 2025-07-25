@@ -111,7 +111,7 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 				enable: true
 			},
 			number: {
-				value: 200,
+				value: 150,
 				density: {
 					enable: true,
 					area: 200
@@ -623,13 +623,13 @@ button, .action-buttons button {
 }
 
 .logo-container {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   grid-column: 2;
   grid-row: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 10px;
 }
 
 .logo-image {
