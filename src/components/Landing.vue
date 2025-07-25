@@ -17,7 +17,7 @@
     </div>
     
     <!-- Main content with custom grid -->
-    <main class="relative z-10 px-3 flex-1 flex items-center justify-center">
+    <main class="relative z-10 px-6 flex-1 flex items-center justify-center">
       <div class="max-w-screen-xl mx-auto w-full h-full flex items-center justify-center">
         <div class="grid-container">
 
@@ -263,17 +263,37 @@ onUnmounted(() => {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
-  gap: 24px 40px;
+  gap: 24px 80px;
   height: fit-content;
   width: 100%;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (min-width: 1440px) {
+  .grid-container {
+    gap: 24px 120px;
+    max-width: 1600px;
+    padding: 0 3rem;
+  }
 }
 
 @media (max-width: 1024px) {
   .grid-container {
-    gap: 16px 16px;
+    gap: 16px 40px;
+    padding: 0 1rem;
+  }
+  .logo-container,
+  .main-title,
+  .description {
+    padding-left: 0.5rem;
+  }
+  .countdown-container {
+    padding-right: 0.5rem;
   }
 }
 
@@ -287,19 +307,19 @@ onUnmounted(() => {
   .logo-container {
     grid-column: 1;
     grid-row: 1;
-    justify-content: flex-start;
+    justify-content: center;
   }
   .main-title {
     grid-column: 1;
     grid-row: 2;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
+    text-align: center;
   }
   .description {
     grid-column: 1;
     grid-row: 3;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
+    text-align: center;
   }
   .countdown-container {
     grid-column: 1 !important;
@@ -471,49 +491,55 @@ onUnmounted(() => {
 }
 
 .subtitle {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 2;
   display: flex;
   align-items: center;
 }
 
 .main-title {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 3;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
 }
 
 .description {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 4;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
 }
 
 .action-buttons {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 5;
   display: flex;
   align-items: center;
 }
 
 .countdown-container {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1 / -1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   animation: countdown-float 5s ease-in-out infinite;
+  padding-right: 1rem;
 }
 
 .countdown-grid {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1 / -1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 15px 15px;
-  justify-self: center;
+  justify-self: end;
   align-self: center;
   grid-template-areas:
     "dias horas"
@@ -625,11 +651,12 @@ button, .action-buttons button {
 .logo-container {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 1rem;
 }
 
 .logo-image {
@@ -671,6 +698,8 @@ button, .action-buttons button {
   .logo-container,
   .main-title,
   .description,
+  .subtitle,
+  .action-buttons,
   .countdown-container {
     grid-column: unset !important;
     grid-row: unset !important;
