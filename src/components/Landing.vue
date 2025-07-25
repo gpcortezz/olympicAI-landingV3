@@ -111,7 +111,7 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 				enable: true
 			},
 			number: {
-				value: 25,
+				value: 200,
 				density: {
 					enable: true,
 					area: 200
@@ -121,19 +121,14 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 				value: { min: 0.005, max: 0.005 }
 			},
 			shape: {
-				type: ["circle", "square", "triangle", "polygon"],
+				type: "text",
 				options: {
-					polygon: [
-						{
-							sides: 5
-						},
-						{
-							sides: 6
-						},
-						{
-							sides: 8
-						}
-					]
+					text: {
+						value: ["*"],
+						style: "",
+						weight: "1000",
+						font: "Arial"
+					}
 				}
 			},
 			size: {
@@ -152,14 +147,14 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 				},
 				links: {
 					color: "#27c479",
-					opacity: 0.08,
+					opacity: 0.03,
 					width: 2
 				},
 				size: {
-					value: { min: 2, max: 5 }
+					value: { min: 5, max: 5 }
 				},
 				opacity: {
-					value: { min: 0.050, max: 0.3 }
+					value: { min: 0.8, max: 0.3 }
 				}
 			}
 		}
