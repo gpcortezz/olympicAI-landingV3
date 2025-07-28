@@ -1,0 +1,569 @@
+<h2>9.1. Estado Actual de las Pruebas</h2>
+<p>El proyecto OlympicAI Landing V3 actualmente <strong>no incluye pruebas automatizadas</strong>. Sin embargo, el código está estructurado de manera que facilita la implementación de pruebas en el futuro.</p>
+
+<h3>9.1.1. Pruebas Manuales Actuales</h3>
+<p>Durante el desarrollo, se realizan las siguientes pruebas manuales:</p>
+<ul>
+    <li><strong>Pruebas de Funcionalidad:</strong> Verificación del contador regresivo</li>
+    <li><strong>Pruebas de Responsividad:</strong> Verificación en diferentes dispositivos</li>
+    <li><strong>Pruebas de Rendimiento:</strong> Verificación de carga y animaciones</li>
+    <li><strong>Pruebas de Compatibilidad:</strong> Verificación en diferentes navegadores</li>
+</ul>
+
+<h2>9.2. Estrategia de Pruebas Propuesta</h2>
+<p>Para futuras implementaciones, se recomienda seguir la estrategia de la <strong>Pirámide de Pruebas</strong>:</p>
+
+<h3>9.2.1. Pirámide de Pruebas</h3>
+<pre>
+        /\
+       /  \     E2E Tests (Pocos)
+      /____\
+     /      \   Integration Tests (Algunos)
+    /________\
+   /          \  Unit Tests (Muchos)
+  /____________\
+</pre>
+
+<h3>9.2.2. Distribución Recomendada</h3>
+<ul>
+    <li><strong>70% Unit Tests:</strong> Pruebas de componentes y funciones individuales</li>
+    <li><strong>20% Integration Tests:</strong> Pruebas de interacción entre componentes</li>
+    <li><strong>10% E2E Tests:</strong> Pruebas de flujos completos de usuario</li>
+</ul>
+
+<h2>9.3. Herramientas de Pruebas Recomendadas</h2>
+
+<h3>9.3.1. Framework de Pruebas Principal</h3>
+<p>Para Vue.js 3, se recomienda <strong>Vitest</strong> como framework principal:</p>
+<ul>
+    <li><strong>Vitest:</strong> Framework de pruebas nativo para Vite</li>
+    <li><strong>Vue Test Utils:</strong> Utilidades específicas para testing de Vue</li>
+    <li><strong>@testing-library/vue:</strong> Utilidades para testing centrado en el usuario</li>
+</ul>
+
+<h3>9.3.2. Herramientas Adicionales</h3>
+<ul>
+    <li><strong>Jest:</strong> Alternativa a Vitest (si se prefiere)</li>
+    <li><strong>Cypress:</strong> Para pruebas E2E</li>
+    <li><strong>Playwright:</strong> Alternativa moderna para E2E</li>
+    <li><strong>MSW (Mock Service Worker):</strong> Para mockear APIs</li>
+</ul>
+
+<h2>9.4. Configuración de Pruebas</h2>
+
+<h3>9.4.1. Configuración de Vitest</h3>
+<p>Crear archivo <code>vitest.config.js</code>:</p>
+<pre><code>import { defineConfig } from 'vitest/config'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.js']
+  }
+})</code></pre>
+
+<h3>9.4.2. Configuración de Vue Test Utils</h3>
+<p>Crear archivo <code>src/test/setup.js</code>:</p>
+<pre><code>import { config } from '@vue/test-utils'
+import { vi } from 'vitest'
+
+// Mock de tsParticles
+vi.mock('tsParticles', () => ({
+  load: vi.fn(),
+  addPreset: vi.fn()
+}))
+
+// Configuración global de Vue Test Utils
+config.global.stubs = {
+  // Stubs para componentes externos
+}</code></pre>
+
+<h3>9.4.3. Scripts de Pruebas</h3>
+<p>Agregar scripts al <code>package.json</code>:</p>
+<pre><code>{
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open"
+  }
+}</code></pre>
+
+<h2>9.5. Pruebas Unitarias</h2>
+
+<h3>9.5.1. Pruebas del Contador Regresivo</h3>
+<p>Crear archivo <code>src/components/__tests__/Landing.test.js</code>:</p>
+<pre><code>import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { mount } from '@vue/test-utils'
+import Landing from '../Landing.vue'
+
+describe('Landing Component', () => {
+  let wrapper
+
+  beforeEach(() => {
+    // Mock de Date para pruebas consistentes
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2024-01-15T10:00:00Z'))
+    
+    wrapper = mount(Landing)
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  describe('Countdown Timer', () => {
+    it('should display correct countdown values', () => {
+      const daysElement = wrapper.find('[data-test="countdown-days"]')
+      const hoursElement = wrapper.find('[data-test="countdown-hours"]')
+      
+      expect(daysElement.text()).toBe('00')
+      expect(hoursElement.text()).toBe('00')
+    })
+
+    it('should update countdown every second', async () => {
+      // Avanzar tiempo en 1 segundo
+      vi.advanceTimersByTime(1000)
+      await wrapper.vm.$nextTick()
+      
+      // Verificar que el contador se actualizó
+      expect(wrapper.vm.countdown.seconds).toBe('59')
+    })
+
+    it('should handle event end date correctly', () => {
+      // Simular fecha después del evento
+      vi.setSystemTime(new Date('2025-09-19T10:00:00Z'))
+      
+      wrapper.vm.updateCountdown()
+      
+      expect(wrapper.vm.countdown.days).toBe('00')
+      expect(wrapper.vm.countdown.hours).toBe('00')
+      expect(wrapper.vm.countdown.minutes).toBe('00')
+      expect(wrapper.vm.countdown.seconds).toBe('00')
+    })
+  })
+
+  describe('Component Rendering', () => {
+    it('should render main title correctly', () => {
+      const title = wrapper.find('.main-title h1')
+      expect(title.text()).toContain('OLIMPIADAS UNIVERSITARIAS DE IA 2025')
+    })
+
+    it('should render countdown cards', () => {
+      const countdownCards = wrapper.findAll('.countdown-card')
+      expect(countdownCards).toHaveLength(4) // días, horas, minutos, segundos
+    })
+
+    it('should display logo', () => {
+      const logo = wrapper.find('.logo-image')
+      expect(logo.exists()).toBe(true)
+    })
+  })
+
+  describe('Responsive Design', () => {
+    it('should apply mobile styles on small screens', async () => {
+      // Simular viewport móvil
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 375
+      })
+      
+      window.dispatchEvent(new Event('resize'))
+      await wrapper.vm.$nextTick()
+      
+      const gridContainer = wrapper.find('.grid-container')
+      expect(gridContainer.classes()).toContain('mobile-layout')
+    })
+  })
+})</code></pre>
+
+<h3>9.5.2. Pruebas de Utilidades</h3>
+<p>Crear archivo <code>src/utils/__tests__/countdown.test.js</code>:</p>
+<pre><code>import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { calculateCountdown } from '../countdown'
+
+describe('Countdown Utils', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('should calculate correct time difference', () => {
+    const targetDate = new Date('2025-09-18T18:00:00Z')
+    vi.setSystemTime(new Date('2025-09-15T10:00:00Z'))
+    
+    const result = calculateCountdown(targetDate)
+    
+    expect(result.days).toBe('3')
+    expect(result.hours).toBe('8')
+    expect(result.minutes).toBe('0')
+    expect(result.seconds).toBe('0')
+  })
+
+  it('should handle zero time difference', () => {
+    const targetDate = new Date('2025-09-18T18:00:00Z')
+    vi.setSystemTime(new Date('2025-09-18T18:00:00Z'))
+    
+    const result = calculateCountdown(targetDate)
+    
+    expect(result.days).toBe('00')
+    expect(result.hours).toBe('00')
+    expect(result.minutes).toBe('00')
+    expect(result.seconds).toBe('00')
+  })
+
+  it('should handle past dates', () => {
+    const targetDate = new Date('2025-09-18T18:00:00Z')
+    vi.setSystemTime(new Date('2025-09-19T10:00:00Z'))
+    
+    const result = calculateCountdown(targetDate)
+    
+    expect(result.days).toBe('00')
+    expect(result.hours).toBe('00')
+    expect(result.minutes).toBe('00')
+    expect(result.seconds).toBe('00')
+  })
+})</code></pre>
+
+<h2>9.6. Pruebas de Integración</h2>
+
+<h3>9.6.1. Pruebas de Interacción de Componentes</h3>
+<p>Crear archivo <code>src/components/__tests__/Landing.integration.test.js</code>:</p>
+<pre><code>import { describe, it, expect, beforeEach } from 'vitest'
+import { mount } from '@vue/test-utils'
+import Landing from '../Landing.vue'
+
+describe('Landing Integration Tests', () => {
+  let wrapper
+
+  beforeEach(() => {
+    wrapper = mount(Landing)
+  })
+
+  describe('Component Integration', () => {
+    it('should integrate countdown with display correctly', async () => {
+      // Simular actualización del contador
+      wrapper.vm.countdown = {
+        days: '15',
+        hours: '23',
+        minutes: '45',
+        seconds: '30'
+      }
+      
+      await wrapper.vm.$nextTick()
+      
+      // Verificar que los valores se muestran correctamente
+      const daysDisplay = wrapper.find('[data-test="countdown-days"]')
+      const hoursDisplay = wrapper.find('[data-test="countdown-hours"]')
+      
+      expect(daysDisplay.text()).toBe('15')
+      expect(hoursDisplay.text()).toBe('23')
+    })
+
+    it('should handle particle system integration', () => {
+      // Verificar que el contenedor de partículas existe
+      const particleContainer = wrapper.find('#light')
+      expect(particleContainer.exists()).toBe(true)
+    })
+
+    it('should integrate responsive design correctly', async () => {
+      // Simular cambio de tamaño de ventana
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 768
+      })
+      
+      window.dispatchEvent(new Event('resize'))
+      await wrapper.vm.$nextTick()
+      
+      // Verificar que el layout se adapta
+      const gridContainer = wrapper.find('.grid-container')
+      expect(gridContainer.classes()).toContain('mobile-layout')
+    })
+  })
+})</code></pre>
+
+<h2>9.7. Pruebas End-to-End (E2E)</h2>
+
+<h3>9.7.1. Configuración de Cypress</h3>
+<p>Crear archivo <code>cypress.config.js</code>:</p>
+<pre><code>import { defineConfig } from 'cypress'
+
+export default defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:5173',
+    supportFile: 'cypress/support/e2e.js',
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    viewportWidth: 1280,
+    viewportHeight: 720
+  }
+})</code></pre>
+
+<h3>9.7.2. Pruebas E2E Principales</h3>
+<p>Crear archivo <code>cypress/e2e/landing.cy.js</code>:</p>
+<pre><code>describe('OlympicAI Landing Page', () => {
+  beforeEach(() => {
+    cy.visit('/')
+  })
+
+  it('should load the landing page successfully', () => {
+    cy.get('h1').should('contain', 'OLIMPIADAS UNIVERSITARIAS DE IA 2025')
+    cy.get('.logo-image').should('be.visible')
+    cy.get('.countdown-card').should('have.length', 4)
+  })
+
+  it('should display countdown timer correctly', () => {
+    cy.get('[data-test="countdown-days"]').should('be.visible')
+    cy.get('[data-test="countdown-hours"]').should('be.visible')
+    cy.get('[data-test="countdown-minutes"]').should('be.visible')
+    cy.get('[data-test="countdown-seconds"]').should('be.visible')
+  })
+
+  it('should update countdown every second', () => {
+    cy.get('[data-test="countdown-seconds"]').then(($seconds) => {
+      const initialSeconds = $seconds.text()
+      
+      // Esperar 2 segundos
+      cy.wait(2000)
+      
+      cy.get('[data-test="countdown-seconds"]').should('not.have.text', initialSeconds)
+    })
+  })
+
+  it('should be responsive on mobile devices', () => {
+    cy.viewport(375, 667) // iPhone SE
+    
+    cy.get('.grid-container').should('have.class', 'mobile-layout')
+    cy.get('.countdown-grid').should('have.class', 'mobile-countdown')
+  })
+
+  it('should be responsive on tablet devices', () => {
+    cy.viewport(768, 1024) // iPad
+    
+    cy.get('.grid-container').should('not.have.class', 'mobile-layout')
+    cy.get('.countdown-grid').should('not.have.class', 'mobile-countdown')
+  })
+
+  it('should display particle effects', () => {
+    cy.get('#light').should('be.visible')
+    cy.get('#light canvas').should('exist')
+  })
+
+  it('should have proper accessibility', () => {
+    cy.get('img').should('have.attr', 'alt')
+    cy.get('h1').should('exist')
+    cy.get('main').should('exist')
+  })
+})</code></pre>
+
+<h2>9.8. Cobertura de Código</h2>
+
+<h3>9.8.1. Configuración de Cobertura</h3>
+<p>Instalar y configurar herramientas de cobertura:</p>
+<pre><code>npm install --save-dev @vitest/coverage-v8</code></pre>
+
+<h3>9.8.2. Configuración de Vitest con Cobertura</h3>
+<p>Actualizar <code>vitest.config.js</code>:</p>
+<pre><code>import { defineConfig } from 'vitest/config'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.js'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/test/',
+        '**/*.d.ts',
+        '**/*.config.js'
+      ],
+      thresholds: {
+        global: {
+          branches: 80,
+          functions: 80,
+          lines: 80,
+          statements: 80
+        }
+      }
+    }
+  }
+})</code></pre>
+
+<h3>9.8.3. Objetivos de Cobertura</h3>
+<ul>
+    <li><strong>Líneas de Código:</strong> 80% mínimo</li>
+    <li><strong>Funciones:</strong> 80% mínimo</li>
+    <li><strong>Ramas:</strong> 80% mínimo</li>
+    <li><strong>Declaraciones:</strong> 80% mínimo</li>
+</ul>
+
+<h2>9.9. Pruebas de Rendimiento</h2>
+
+<h3>9.9.1. Lighthouse CI</h3>
+<p>Configurar Lighthouse CI para pruebas de rendimiento automatizadas:</p>
+<pre><code>npm install --save-dev @lhci/cli</code></pre>
+
+<h3>9.9.2. Configuración de Lighthouse</h3>
+<p>Crear archivo <code>lighthouserc.js</code>:</p>
+<pre><code>module.exports = {
+  ci: {
+    collect: {
+      url: ['http://localhost:5173'],
+      numberOfRuns: 3
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['warn', { minScore: 0.9 }],
+        'categories:accessibility': ['error', { minScore: 0.9 }],
+        'categories:best-practices': ['warn', { minScore: 0.9 }],
+        'categories:seo': ['warn', { minScore: 0.9 }]
+      }
+    },
+    upload: {
+      target: 'temporary-public-storage'
+    }
+  }
+}</code></pre>
+
+<h2>9.10. Pruebas de Compatibilidad</h2>
+
+<h3>9.10.1. Navegadores Soportados</h3>
+<ul>
+    <li><strong>Chrome:</strong> Versión 90+</li>
+    <li><strong>Firefox:</strong> Versión 88+</li>
+    <li><strong>Safari:</strong> Versión 14+</li>
+    <li><strong>Edge:</strong> Versión 90+</li>
+</ul>
+
+<h3>9.10.2. Pruebas de Compatibilidad con Playwright</h3>
+<p>Crear archivo <code>playwright.config.js</code>:</p>
+<pre><code>import { defineConfig, devices } from '@playwright/test'
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: 'html',
+  use: {
+    baseURL: 'http://localhost:5173',
+    trace: 'on-first-retry'
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] }
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] }
+    },
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] }
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] }
+    }
+  ],
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:5173',
+    reuseExistingServer: !process.env.CI
+  }
+})</code></pre>
+
+<h2>9.11. Automatización de Pruebas</h2>
+
+<h3>9.11.1. GitHub Actions</h3>
+<p>Crear archivo <code>.github/workflows/test.yml</code>:</p>
+<pre><code>name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run unit tests
+      run: npm run test:run
+    
+    - name: Run E2E tests
+      run: |
+        npm run build
+        npm run preview &
+        npm run test:e2e
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage/lcov.info</code></pre>
+
+<h2>9.12. Cómo Ejecutar Pruebas</h2>
+
+<h3>9.12.1. Comandos de Pruebas</h3>
+<pre><code># Ejecutar todas las pruebas unitarias
+npm run test
+
+# Ejecutar pruebas en modo watch
+npm run test:ui
+
+# Ejecutar pruebas con cobertura
+npm run test:coverage
+
+# Ejecutar pruebas E2E
+npm run test:e2e
+
+# Ejecutar pruebas E2E en modo interactivo
+npm run test:e2e:open
+
+# Ejecutar pruebas de compatibilidad
+npx playwright test
+
+# Ejecutar Lighthouse CI
+npx lhci autorun</code></pre>
+
+<h3>9.12.2. Verificación de Cobertura</h3>
+<p>Después de ejecutar las pruebas con cobertura:</p>
+<pre><code># Ver reporte de cobertura en el navegador
+open coverage/index.html
+
+# Ver reporte de Lighthouse
+open .lighthouseci/</code></pre> 

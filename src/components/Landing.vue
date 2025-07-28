@@ -111,7 +111,7 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 				enable: true
 			},
 			number: {
-				value: 150,
+				value: 120,
 				density: {
 					enable: true,
 					area: 200
@@ -151,7 +151,7 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 					width: 2
 				},
 				size: {
-					value: { min: 5, max: 5 }
+					value: { min: 7, max: 7 }
 				},
 				opacity: {
 					value: { min: 0.3, max: 0.55 }

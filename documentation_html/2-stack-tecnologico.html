@@ -1,0 +1,129 @@
+<h2>2.1. Tecnologías Principales</h2>
+<p>El proyecto OlympicAI Landing V3 utiliza un stack tecnológico moderno y optimizado para el desarrollo frontend:</p>
+
+<ul>
+    <li><strong>Framework Frontend:</strong> Vue.js 3.5.17 (Composition API con &lt;script setup&gt;)</li>
+    <li><strong>Build Tool:</strong> Vite 7.0.4 (Bundler y servidor de desarrollo)</li>
+    <li><strong>CSS Framework:</strong> Tailwind CSS 3.4.17 (Utility-first CSS framework)</li>
+    <li><strong>Animaciones:</strong> GSAP 3.13.0 (GreenSock Animation Platform)</li>
+    <li><strong>Efectos de Partículas:</strong> tsParticles 3.0.3 (Sistema de partículas interactivas)</li>
+    <li><strong>Iconos:</strong> Lucide Vue Next 0.525.0 (Iconografía moderna)</li>
+    <li><strong>Lenguaje:</strong> JavaScript ES6+ (Módulos ES, async/await, destructuring)</li>
+    <li><strong>Gestor de Paquetes:</strong> npm (Node Package Manager)</li>
+</ul>
+
+<h2>2.2. Dependencias de Desarrollo</h2>
+<p>Herramientas y librerías utilizadas durante el desarrollo:</p>
+
+<ul>
+    <li><strong>Plugin Vue para Vite:</strong> @vitejs/plugin-vue 6.0.0</li>
+    <li><strong>PostCSS:</strong> 8.5.6 (Procesamiento de CSS)</li>
+    <li><strong>Autoprefixer:</strong> 10.4.21 (Prefijos CSS automáticos)</li>
+</ul>
+
+<h2>2.3. Configuración de Herramientas</h2>
+
+<h3>Vite Configuration</h3>
+<pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+})</code></pre>
+
+<h3>Tailwind CSS Configuration</h3>
+<pre><code>/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</code></pre>
+
+<h2>2.4. Características Técnicas</h2>
+
+<h3>Vue.js 3 Composition API</h3>
+<p>El proyecto utiliza la Composition API de Vue 3 con la sintaxis &lt;script setup&gt;, que proporciona:</p>
+<ul>
+    <li>Mejor inferencia de tipos</li>
+    <li>Código más conciso y legible</li>
+    <li>Mejor tree-shaking</li>
+    <li>Mejor rendimiento en tiempo de ejecución</li>
+</ul>
+
+<h3>Vite como Build Tool</h3>
+<p>Vite ofrece ventajas significativas para el desarrollo:</p>
+<ul>
+    <li><strong>Hot Module Replacement (HMR):</strong> Recarga instantánea durante el desarrollo</li>
+    <li><strong>Build Optimizado:</strong> Bundling eficiente para producción</li>
+    <li><strong>ES Modules Nativo:</strong> Soporte nativo para módulos ES en desarrollo</li>
+    <li><strong>Configuración Mínima:</strong> Setup rápido y sencillo</li>
+</ul>
+
+<h3>Tailwind CSS</h3>
+<p>Framework CSS utility-first que proporciona:</p>
+<ul>
+    <li>Clases utilitarias para diseño rápido</li>
+    <li>Sistema de diseño consistente</li>
+    <li>Responsive design integrado</li>
+    <li>Optimización automática del CSS final</li>
+</ul>
+
+<h2>2.5. Efectos Visuales y Animaciones</h2>
+
+<h3>GSAP (GreenSock Animation Platform)</h3>
+<p>Librería de animaciones profesionales utilizada para:</p>
+<ul>
+    <li>Animaciones de entrada y salida</li>
+    <li>Transiciones suaves entre estados</li>
+    <li>Efectos de hover y interacción</li>
+    <li>Timeline animations complejas</li>
+</ul>
+
+<h3>tsParticles</h3>
+<p>Sistema de partículas interactivas que proporciona:</p>
+<ul>
+    <li>Efectos de partículas en tiempo real</li>
+    <li>Interactividad con el mouse</li>
+    <li>Configuración personalizable de partículas</li>
+    <li>Optimización de rendimiento</li>
+</ul>
+
+<h2>2.6. Herramientas de Desarrollo Sugeridas</h2>
+<p>Para un desarrollo óptimo del proyecto, se recomiendan las siguientes herramientas:</p>
+
+<ul>
+    <li><strong>IDE/Editor:</strong> Visual Studio Code con extensiones Vue.js</li>
+    <li><strong>Extensiones Recomendadas:</strong>
+        <ul>
+            <li>Vue Language Features (Volar)</li>
+            <li>Tailwind CSS IntelliSense</li>
+            <li>ESLint</li>
+            <li>Prettier</li>
+            <li>Auto Rename Tag</li>
+        </ul>
+    </li>
+    <li><strong>Navegador:</strong> Chrome DevTools para debugging</li>
+    <li><strong>Herramientas de Testing:</strong> Vue Test Utils (para futuras implementaciones)</li>
+</ul>
+
+<h2>2.7. Compatibilidad de Navegadores</h2>
+<p>El proyecto está optimizado para navegadores modernos que soporten:</p>
+<ul>
+    <li>ES6+ (Arrow functions, destructuring, modules)</li>
+    <li>CSS Grid y Flexbox</li>
+    <li>CSS Custom Properties (variables)</li>
+    <li>Web APIs modernas</li>
+</ul>
+
+<p><strong>Navegadores Soportados:</strong></p>
+<ul>
+    <li>Chrome 90+</li>
+    <li>Firefox 88+</li>
+    <li>Safari 14+</li>
+    <li>Edge 90+</li>
+</ul> 
