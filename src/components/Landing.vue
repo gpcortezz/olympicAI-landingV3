@@ -154,7 +154,7 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+es
 					value: { min: 5, max: 5 }
 				},
 				opacity: {
-					value: { min: 0.8, max: 0.3 }
+					value: { min: 0.3, max: 0.55 }
 				}
 			}
 		}
