@@ -47,7 +47,7 @@
           </div>
 
           <!-- Countdown timer cards - lado derecho -->
-          <div class="countdown-container">
+          <div v-if="showCountdown" class="countdown-container">
             <div class="countdown-grid">
               <!-- Días -->
               <div class="countdown-card countdown-card--main" style="grid-area: dias;">
@@ -82,6 +82,16 @@
               </div>
             </div>
           </div>
+          <div v-else class="countdown-container">
+            <div class="registration-button-container">
+              <button class="registration-button">
+                <a href="" target="_blank" class="registration-link">
+                  <span class="button-text">Visita el sitio oficial</span>
+                  <span class="button-icon">→</span>
+                </a>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -96,7 +106,7 @@ import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-09-28T00:00:00'
+const eventDateTime = '2025-07-31T12:00:00'
 
 // Countdown timer state
 const countdown = ref({
@@ -108,6 +118,7 @@ const countdown = ref({
 
 // Estado para los fuegos artificiales
 const showFireworks = ref(false)
+const showCountdown = ref(true)
 let fireworksLaunched = false // Variable para controlar que solo se lancen una vez
 
 // Timer for countdown
@@ -157,6 +168,17 @@ const updateCountdown = () => {
 
 const launchFireworks = () => {
   showFireworks.value = true
+  
+  // Agregar transición de salida al countdown
+  const countdownContainer = document.querySelector('.countdown-container')
+  if (countdownContainer) {
+    countdownContainer.classList.add('fade-out')
+  }
+  
+  // Ocultar countdown después de la transición
+  setTimeout(() => {
+    showCountdown.value = false
+  }, 600) // 600ms para que coincida con la duración de la transición CSS
 
   // Crear múltiples fuegos artificiales distribuidos en 20 segundos
   createFirework()
@@ -643,22 +665,22 @@ onUnmounted(() => {
 
 .countdown-container {
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 3;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   animation: countdown-float 5s ease-in-out infinite;
   padding-right: 1rem;
 }
 
 .countdown-grid {
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 15px 15px;
-  justify-self: end;
+  justify-self: center;
   align-self: center;
   grid-template-areas:
     "dias horas"
@@ -917,6 +939,191 @@ button, .action-buttons button {
     transform: scale(2);
     opacity: 0;
   }
+}
+
+/* Estilos para el botón de registro */
+.registration-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: countdown-float 5s ease-in-out infinite;
+  padding-right: 1rem;
+  animation: button-appear 0.8s ease-out;
+}
+
+@keyframes button-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(39, 196, 121, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    border-color: rgba(39, 196, 121, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 12px 40px rgba(39, 196, 121, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+      0 0 20px rgba(39, 196, 121, 0.3);
+    border-color: rgba(39, 196, 121, 0.8);
+  }
+}
+
+.registration-button {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.15) 0%, rgba(27, 112, 117, 0.08) 50%, rgba(39, 196, 121, 0.05) 100%);
+  border: 2px solid rgba(39, 196, 121, 0.6);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 
+    0 8px 32px rgba(39, 196, 121, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  animation: button-glow 3s ease-in-out infinite;
+}
+
+.registration-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(39, 196, 121, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.registration-button:hover::before {
+  left: 100%;
+}
+
+.registration-button:hover {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.32) 0%, rgba(27, 112, 117, 0.18) 100%);
+  box-shadow: 0 12px 40px rgba(39, 196, 121, 0.55);
+  border-color: #27c479;
+  transform: translateY(-8px) scale(1.06);
+}
+
+.registration-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  color: #27c479;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-shadow: 0 0 15px rgba(39, 196, 121, 0.5);
+  transition: all 0.3s ease;
+}
+
+.registration-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.button-text {
+  transition: transform 0.3s ease;
+}
+
+.button-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+.registration-link:hover .button-text {
+  transform: translateX(-4px);
+}
+
+.registration-link:hover .button-icon {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* Responsive para el botón */
+@media (max-width: 768px) {
+  .registration-button-container {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    display: flex;
+    animation: none;
+    margin-top: 0;
+    padding-right: 0 !important;
+  }
+  
+  .registration-button {
+    padding: 0;
+  }
+  
+  .registration-link {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .registration-button-container {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    display: flex !important;
+    animation: none;
+    padding: 0 0.5rem;
+  }
+  
+  .registration-button {
+    width: auto;
+    max-width: 280px;
+  }
+  
+  .registration-link {
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    justify-content: center;
+  }
+  
+  .button-icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animación de salida para el countdown */
+.countdown-container {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.countdown-container.fade-out {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
 }
 </style>
 
