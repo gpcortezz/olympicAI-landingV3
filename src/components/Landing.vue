@@ -95,76 +95,8 @@ import newLogoImg from '../assets/img/newLogo.png'
 import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/+esm";
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
-(async () => {
-	await loadAll(tsParticles);
-
-	await tsParticles.addPreset("lightdark", {
-		fullScreen: {
-			enable: true,
-			zIndex: 1
-		},
-		particles: {
-			links: {
-				enable: true
-			},
-			move: {
-				enable: true
-			},
-			number: {
-				value: 120,
-				density: {
-					enable: true,
-					area: 200
-				}
-			},
-			opacity: {
-				value: { min: 0.005, max: 0.005 }
-			},
-			shape: {
-				type: "text",
-				options: {
-					text: {
-						value: ["*"],
-						style: "",
-						weight: "1000",
-						font: "Arial"
-					}
-				}
-			},
-			size: {
-				value: { min: 1, max: 1 }
-			}
-		}
-	});
-
-	await tsParticles.load({
-		id: "light",
-		options: {
-			preset: "lightdark",
-			particles: {
-				color: {
-					value: ["#27c479", "#4ade80", "#1b7069"]
-				},
-				links: {
-					color: "#27c479",
-					opacity: 0.03,
-					width: 2
-				},
-				size: {
-					value: { min: 7, max: 7 }
-				},
-				opacity: {
-					value: { min: 0.3, max: 0.55 }
-				}
-			}
-		}
-	});
-
-
-})();
-
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-09-18T18:00:00'
+const eventDateTime = '2025-09-28T00:00:00'
 
 // Countdown timer state
 const countdown = ref({
@@ -173,6 +105,10 @@ const countdown = ref({
   minutes: '00',
   seconds: '00'
 })
+
+// Estado para los fuegos artificiales
+const showFireworks = ref(false)
+let fireworksLaunched = false // Variable para controlar que solo se lancen una vez
 
 // Timer for countdown
 let timer = null
@@ -199,6 +135,9 @@ const updateCountdown = () => {
       minutes: String(minutes).padStart(2, '0'),
       seconds: String(seconds).padStart(2, '0')
     }
+    
+    // Resetear la bandera cuando el contador vuelve a ser mayor que 0
+    fireworksLaunched = false
   } else {
     // Event has ended
     countdown.value = {
@@ -207,12 +146,192 @@ const updateCountdown = () => {
       minutes: '00',
       seconds: '00'
     }
+    
+    // Lanzar fuegos artificiales solo una vez cuando el contador llegue a 0
+    if (!fireworksLaunched) {
+      fireworksLaunched = true
+      launchFireworks()
+    }
   }
 }
 
-onMounted(() => {
+const launchFireworks = () => {
+  showFireworks.value = true
+
+  // Crear múltiples fuegos artificiales distribuidos en 20 segundos
+  createFirework()
+  setTimeout(() => createFirework(), 500)
+  setTimeout(() => createFirework(), 1000)
+  setTimeout(() => createFirework(), 1500)
+  setTimeout(() => createFirework(), 2000)
+  setTimeout(() => createFirework(), 2500)
+  setTimeout(() => createFirework(), 3000)
+  setTimeout(() => createFirework(), 3500)
+  setTimeout(() => createFirework(), 4000)
+  setTimeout(() => createFirework(), 4500)
+  setTimeout(() => createFirework(), 5000)
+  setTimeout(() => createFirework(), 5500)
+  setTimeout(() => createFirework(), 6000)
+  setTimeout(() => createFirework(), 6500)
+  setTimeout(() => createFirework(), 7000)
+  setTimeout(() => createFirework(), 7500)
+  setTimeout(() => createFirework(), 8000)
+  setTimeout(() => createFirework(), 8500)
+  setTimeout(() => createFirework(), 9000)
+  setTimeout(() => createFirework(), 9500)
+  setTimeout(() => createFirework(), 10000)
+  setTimeout(() => createFirework(), 10500)
+  setTimeout(() => createFirework(), 11000)
+  setTimeout(() => createFirework(), 11500)
+  setTimeout(() => createFirework(), 12000)
+  setTimeout(() => createFirework(), 12500)
+  setTimeout(() => createFirework(), 13000)
+  setTimeout(() => createFirework(), 13500)
+  setTimeout(() => createFirework(), 14000)
+  setTimeout(() => createFirework(), 14500)
+  setTimeout(() => createFirework(), 15000)
+  setTimeout(() => createFirework(), 15500)
+  setTimeout(() => createFirework(), 16000)
+  setTimeout(() => createFirework(), 16500)
+  setTimeout(() => createFirework(), 17000)
+  setTimeout(() => createFirework(), 17500)
+  setTimeout(() => createFirework(), 18000)
+  setTimeout(() => createFirework(), 18500)
+  setTimeout(() => createFirework(), 19000)
+  setTimeout(() => createFirework(), 19500)
+
+  // Ocultar fuegos artificiales después de 20 segundos
+  setTimeout(() => {
+    showFireworks.value = false
+    // Limpiar partículas restantes
+    const fireworks = document.querySelectorAll('.firework-particle')
+    fireworks.forEach(fw => fw.remove())
+  }, 20000)
+}
+
+const createFirework = () => {
+  // Usar la paleta de colores de tu página
+  const colors = ['#27c479', '#4ade80', '#1b7069', '#34d4a7', '#3dd8ab', '#46dcaf', '#4fe0b3', '#58e4b7', '#61e8bb', '#ffffff']
+  const container = document.body
+
+  // Posición aleatoria
+  const x = Math.random() * window.innerWidth
+  const y = Math.random() * (window.innerHeight / 2) + 100
+
+  // Crear 20-30 partículas por fuego artificial
+  const particleCount = 20 + Math.random() * 10
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div')
+    particle.className = 'firework-particle'
+    particle.style.cssText = `
+      position: fixed;
+      left: ${x}px;
+      top: ${y}px;
+      width: 4px;
+      height: 4px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+    `
+
+    container.appendChild(particle)
+
+    // Animación de la partícula - duración extendida
+    const angle = (Math.PI * 2 * i) / particleCount
+    const velocity = 100 + Math.random() * 100
+    const life = 3 + Math.random() * 3 // Aumentado de 2-4 segundos a 3-6 segundos
+
+    const dx = Math.cos(angle) * velocity
+    const dy = Math.sin(angle) * velocity
+
+    particle.animate([
+      {
+        transform: 'translate(0, 0) scale(1)',
+        opacity: 1
+      },
+      {
+        transform: `translate(${dx}px, ${dy + 100}px) scale(0)`,
+        opacity: 0
+      }
+    ], {
+      duration: life * 1000,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }).onfinish = () => {
+      particle.remove()
+    }
+  }
+}
+
+onMounted(async () => {
   updateCountdown()
   timer = setInterval(updateCountdown, 1000)
+
+  // Configuración de tsParticles
+  await loadAll(tsParticles);
+
+  await tsParticles.addPreset("lightdark", {
+    fullScreen: {
+      enable: true,
+      zIndex: 1
+    },
+    particles: {
+      links: {
+        enable: true
+      },
+      move: {
+        enable: true
+      },
+      number: {
+        value: 100,
+        density: {
+          enable: true,
+          area: 150
+        }
+      },
+      opacity: {
+        value: { min: 0.005, max: 0.005 }
+      },
+      shape: {
+        type: "text",
+        options: {
+          text: {
+            value: ["*"],
+            style: "",
+            weight: "1000",
+            font: "Arial"
+          }
+        }
+      },
+      size: {
+        value: { min: 1, max: 1 }
+      }
+    }
+  });
+
+  await tsParticles.load({
+    id: "light",
+    options: {
+      preset: "lightdark",
+      particles: {
+        color: {
+          value: ["#27c479", "#4ade80", "#1b7069"]
+        },
+        links: {
+          color: "#27c479",
+          opacity: 0.03,
+          width: 2
+        },
+        size: {
+          value: { min: 7, max: 7 }
+        },
+        opacity: {
+          value: { min: 0.3, max: 0.55 }
+        }
+      }
+    }
+  });
 })
 
 onUnmounted(() => {
@@ -750,6 +869,53 @@ button, .action-buttons button {
     box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
     transform: none !important;
     filter: none !important;
+  }
+}
+
+/* Estilos para los fuegos artificiales */
+.firework-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  animation: firework-glow 0.5s ease-out;
+}
+
+@keyframes firework-glow {
+  0% {
+    box-shadow: 0 0 2px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 4px currentColor;
+  }
+}
+
+/* Efecto de brillo adicional para las partículas */
+.firework-particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0%, transparent 70%);
+  opacity: 0.3;
+  animation: firework-pulse 1s ease-out;
+}
+
+@keyframes firework-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 </style>
