@@ -85,7 +85,7 @@
               </div>
             </div>
           </div>
-          <div v-else class="countdown-container">
+          <div v-else class="registration-container">
             <div class="registration-button-container">
               <button class="registration-button">
                 <a href="" target="_blank" class="registration-link">
@@ -109,7 +109,7 @@ import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-07-31T12:00:00'
+const eventDateTime = '2025-07-30T12:00:00'
 
 // Countdown timer state
 const countdown = ref({
@@ -999,12 +999,19 @@ button, .action-buttons button {
 }
 
 /* Estilos para el botón de registro */
+.registration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .registration-button-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: countdown-float 5s ease-in-out infinite;
-  padding-right: 1rem;
   animation: button-appear 0.8s ease-out;
 }
 
@@ -1042,64 +1049,38 @@ button, .action-buttons button {
 }
 
 .registration-button {
-  background: linear-gradient(135deg, rgba(39, 196, 121, 0.15) 0%, rgba(27, 112, 117, 0.08) 50%, rgba(39, 196, 121, 0.05) 100%);
-  border: 2px solid rgba(39, 196, 121, 0.6);
-  border-radius: 16px;
+  background: rgba(39, 196, 121, 0.1);
+  border: 1px solid rgba(39, 196, 121, 0.3);
+  border-radius: 8px;
   padding: 0;
-  box-shadow: 
-    0 8px 32px rgba(39, 196, 121, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
   font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  animation: button-glow 3s ease-in-out infinite;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.registration-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(39, 196, 121, 0.3), transparent);
-  transition: left 0.5s ease;
-}
 
-.registration-button:hover::before {
-  left: 100%;
-}
 
 .registration-button:hover {
-  background: linear-gradient(135deg, rgba(39, 196, 121, 0.32) 0%, rgba(27, 112, 117, 0.18) 100%);
-  box-shadow: 0 12px 40px rgba(39, 196, 121, 0.55);
-  border-color: #27c479;
-  transform: translateY(-8px) scale(1.06);
+  background: rgba(39, 196, 121, 0.2);
+  border-color: rgba(39, 196, 121, 0.5);
+  transform: translateY(-2px);
 }
 
 .registration-link {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 24px;
+  gap: 8px;
+  padding: 14px 24px;
   color: #27c479;
   text-decoration: none;
   font-size: 1.1rem;
-  font-weight: 800;
-  text-shadow: 0 0 15px rgba(39, 196, 121, 0.5);
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .registration-link:hover {
   color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .button-text {
@@ -1107,22 +1088,31 @@ button, .action-buttons button {
 }
 
 .button-icon {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   transition: transform 0.3s ease;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .registration-link:hover .button-text {
-  transform: translateX(-4px);
+  transform: translateX(-2px);
 }
 
 .registration-link:hover .button-icon {
-  transform: translateX(4px);
+  transform: translateX(2px);
   opacity: 1;
 }
 
 /* Responsive para el botón */
 @media (max-width: 768px) {
+  .registration-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: fit-content !important;
+    display: flex;
+    margin: 0 auto 20px auto !important;
+    padding-right: 0 !important;
+  }
+  
   .registration-button-container {
     justify-content: center !important;
     align-items: center !important;
@@ -1138,7 +1128,7 @@ button, .action-buttons button {
   }
   
   .registration-link {
-    padding: 14px 20px;
+    padding: 12px 20px;
     font-size: 1rem;
   }
 }
@@ -1152,6 +1142,15 @@ button, .action-buttons button {
 
   .countdown-card {
     margin: 5px;
+  }
+  
+  .registration-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: fit-content !important;
+    display: flex !important;
+    padding: 0 0.5rem;
+    margin: 0 auto 20px auto !important;
   }
   
   .registration-button-container {
@@ -1169,8 +1168,8 @@ button, .action-buttons button {
   }
   
   .registration-link {
-    padding: 12px 18px;
-    font-size: 0.95rem;
+    padding: 10px 16px;
+    font-size: 0.9rem;
     justify-content: center;
   }
   
@@ -1195,6 +1194,11 @@ button, .action-buttons button {
   }
   .countdown-grid {
     gap: 1px !important;
+  }
+  
+  .registration-link {
+    padding: 8px 14px;
+    font-size: 0.85rem;
   }
 }
 
