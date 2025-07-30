@@ -1048,23 +1048,70 @@ button, .action-buttons button {
   }
 }
 
+@keyframes button-breath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes button-shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
 .registration-button {
-  background: rgba(39, 196, 121, 0.1);
-  border: 1px solid rgba(39, 196, 121, 0.3);
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.12) 0%, rgba(27, 112, 117, 0.08) 100%);
+  border: 1px solid rgba(39, 196, 121, 0.4);
   border-radius: 8px;
   padding: 0;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
   font-weight: 600;
   letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  animation: button-breath 4s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.registration-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
 
 
 .registration-button:hover {
-  background: rgba(39, 196, 121, 0.2);
-  border-color: rgba(39, 196, 121, 0.5);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.18) 0%, rgba(27, 112, 117, 0.12) 100%);
+  border-color: rgba(39, 196, 121, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 12px 40px rgba(39, 196, 121, 0.3),
+    0 0 20px rgba(39, 196, 121, 0.2);
+  animation-play-state: paused;
+}
+
+.registration-button:hover::before {
+  left: 100%;
 }
 
 .registration-link {
@@ -1076,11 +1123,14 @@ button, .action-buttons button {
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
 }
 
 .registration-link:hover {
   color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .button-text {
@@ -1089,8 +1139,9 @@ button, .action-buttons button {
 
 .button-icon {
   font-size: 0.9rem;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.7;
+  filter: drop-shadow(0 0 2px rgba(39, 196, 121, 0.3));
 }
 
 .registration-link:hover .button-text {
@@ -1098,8 +1149,9 @@ button, .action-buttons button {
 }
 
 .registration-link:hover .button-icon {
-  transform: translateX(2px);
+  transform: translateX(3px);
   opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(39, 196, 121, 0.6));
 }
 
 /* Responsive para el botón */
