@@ -16,17 +16,18 @@
       </div>
     </div>
     
-    <!-- Main content with custom grid -->
+    <!-- Main content with two containers -->
     <main class="relative z-10 px-6 flex-1 flex items-center justify-center">
       <div class="max-w-screen-xl mx-auto w-full h-full flex items-center justify-center">
-        <div class="grid-container">
-
+        
+        <!-- Content Container -->
+        <div class="content-container">
           <!-- Logo - arriba de los textos -->
           <div class="logo-container">
             <img :src="newLogoImg" alt="Logo" class="logo-image" />
           </div>
 
-          <!-- Main title - div6 -->
+          <!-- Main title -->
           <div class="main-title">
             <h1 class="text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
               <span style="color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">OLIMPIADAS </span>
@@ -37,7 +38,7 @@
             </h1>
           </div>
 
-          <!-- Description - div7 -->
+          <!-- Description -->
           <div class="description">
             <p class="text-xl lg:text-2xl leading-relaxed max-w-3xl" style="color: #ffffff; opacity: 0.9; text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);">
               Compite con los mejores estudiantes universitarios en desafíos de 
@@ -45,8 +46,10 @@
               algoritmos y soluciones innovadoras.
             </p>
           </div>
+        </div>
 
-          <!-- Countdown timer cards - lado derecho -->
+        <!-- Countdown Container -->
+        <div class="countdown-wrapper">
           <div v-if="showCountdown" class="countdown-container">
             <div class="countdown-grid">
               <!-- Días -->
@@ -402,82 +405,132 @@ onUnmounted(() => {
 .opacity-4 { opacity: 0.04; }
 .opacity-5 { opacity: 0.05; }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto auto auto;
-  gap: 24px 80px;
-  height: fit-content;
-  width: 100%;
+/* Main layout with two containers */
+.max-w-screen-xl {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 300px;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 @media (min-width: 1440px) {
-  .grid-container {
-    gap: 24px 120px;
+  .max-w-screen-xl {
+    gap: 300px;
     max-width: 1600px;
     padding: 0 3rem;
   }
 }
 
 @media (max-width: 1024px) {
-  .grid-container {
-    gap: 16px 40px;
+  .max-w-screen-xl {
+    gap: 40px;
     padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .max-w-screen-xl {
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+  }
+}
+
+/* Content Container */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+}
+
+@media (max-width: 1024px) {
+  .content-container {
+    gap: 16px;
   }
   .logo-container,
   .main-title,
   .description {
     padding-left: 0.5rem;
   }
-  .countdown-container {
-    padding-right: 0.5rem;
-  }
+}
+
+/* Countdown Wrapper */
+.countdown-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto auto auto;
-    gap: 12px 0;
-    justify-items: center;
+  .max-w-screen-xl {
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
   }
+  
+  .content-container {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .countdown-wrapper {
+    order: 2;
+    width: 100%;
+  }
+  
   .logo-container {
-    grid-column: 1;
-    grid-row: 1;
     justify-content: center;
   }
+  
   .main-title {
-    grid-column: 1;
-    grid-row: 2;
     justify-content: center;
     text-align: center;
   }
+  
   .description {
-    grid-column: 1;
-    grid-row: 3;
     justify-content: center;
     text-align: center;
   }
+  
   .countdown-container {
-    grid-column: 1 !important;
-    grid-row: 4 !important;
-    justify-content: center !important;
-    align-items: center !important;
     width: 100%;
     display: flex;
-    animation: none;
+    justify-content: center;
+    align-items: center;
     margin-top: 1rem;
   }
+  
   .countdown-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px 10px;
     margin-top: 0;
     justify-self: center;
+  }
+  
+  /* Desactivar completamente efectos de hover en móviles para evitar superposición */
+  .countdown-card,
+  .countdown-card--main,
+  .countdown-card--light {
+    transition: none !important;
+  }
+  
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+    border: 2.5px solid #27c479 !important;
   }
 }
 
@@ -631,16 +684,7 @@ onUnmounted(() => {
   transition: all 0.3s ease;
 }
 
-.subtitle {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  align-items: center;
-}
-
 .main-title {
-  grid-column: 1;
-  grid-row: 3;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -648,24 +692,13 @@ onUnmounted(() => {
 }
 
 .description {
-  grid-column: 1;
-  grid-row: 4;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-left: 1rem;
 }
 
-.action-buttons {
-  grid-column: 1;
-  grid-row: 5;
-  display: flex;
-  align-items: center;
-}
-
 .countdown-container {
-  grid-column: 2;
-  grid-row: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -674,8 +707,6 @@ onUnmounted(() => {
 }
 
 .countdown-grid {
-  grid-column: 2;
-  grid-row: 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -738,14 +769,14 @@ onUnmounted(() => {
 }
 
 .countdown-card--main, .countdown-card--light {
-  background: linear-gradient(135deg, rgba(39, 196, 121, 0.22) 0%, rgba(27, 112, 117, 0.13) 100%) !important;
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
   border: 2.5px solid #27c479 !important;
   box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 .countdown-card--main:hover, .countdown-card--light:hover {
-  background: linear-gradient(135deg, rgba(39, 196, 121, 0.32) 0%, rgba(27, 112, 117, 0.18) 100%) !important;
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.15) 0%, rgba(27, 112, 117, 0.08) 100%) !important;
   box-shadow: 0 12px 40px rgba(39, 196, 121, 0.55) !important;
   border-color: #27c479 !important;
   transform: translateY(-8px) scale(1.06);
@@ -792,8 +823,6 @@ button, .action-buttons button {
 .logo-container {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  grid-column: 1;
-  grid-row: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -818,32 +847,16 @@ button, .action-buttons button {
 
 @media (max-width: 768px) {
   .countdown-container {
-    display: block !important;
+    display: flex !important;
     width: 100% !important;
     margin: 1.5rem 0 0 0 !important;
-    grid-column: unset !important;
-    grid-row: unset !important;
-    justify-content: unset !important;
-    align-items: unset !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   .countdown-grid {
     width: 100% !important;
     margin: 0 auto !important;
-    grid-column: unset !important;
-    grid-row: unset !important;
-    justify-self: unset !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .logo-container,
-  .main-title,
-  .description,
-  .subtitle,
-  .action-buttons,
-  .countdown-container {
-    grid-column: unset !important;
-    grid-row: unset !important;
+    justify-self: center !important;
   }
 }
 
@@ -851,18 +864,28 @@ button, .action-buttons button {
   .countdown-grid {
     display: flex !important;
     flex-direction: row !important;
-    overflow-x: auto !important;
-    gap: 6px !important;
-    width: 100vw !important;
+    width: 100% !important;
     min-width: 0 !important;
     margin: 0 !important;
     grid-template-columns: unset !important;
     grid-template-rows: unset !important;
     grid-template-areas: unset !important;
+    gap: 2px !important;
+    overflow-x: hidden !important;
   }
   .countdown-card {
-    min-width: 90px !important;
-    flex: 0 0 auto !important;
+    min-width: 45px !important;
+    flex: 1 1 0 !important;
+    padding: 6px 2px !important;
+  }
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 0.75rem !important;
+    line-height: 0.9rem !important;
+  }
+  .countdown-card .text-sm {
+    font-size: 0.5rem !important;
+    line-height: 0.7rem !important;
   }
 }
 
@@ -871,7 +894,9 @@ button, .action-buttons button {
     overflow-x: hidden !important;
   }
   .main,
-  .grid-container,
+  .max-w-screen-xl,
+  .content-container,
+  .countdown-wrapper,
   .countdown-grid {
     width: 100% !important;
     min-width: 0 !important;
@@ -880,17 +905,49 @@ button, .action-buttons button {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+  
+  .max-w-screen-xl {
+    padding: 0 0.25rem !important;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 641px) {
+  /* Estilos específicos para 768px exactamente */
+  .countdown-card,
+  .countdown-card--main,
+  .countdown-card--light {
+    transition: none !important;
+  }
+  
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+    border: 2.5px solid #27c479 !important;
+  }
 }
 
 @media (max-width: 640px) {
   .countdown-card:hover,
   .countdown-card--main:hover,
   .countdown-card--light:hover {
-    background: linear-gradient(135deg, rgba(39, 196, 121, 0.22) 0%, rgba(27, 112, 117, 0.13) 100%) !important;
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
     border: 2.5px solid #27c479 !important;
-    box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
     transform: none !important;
     filter: none !important;
+  }
+
+  .countdown-container {
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.03) 0%, rgba(27, 112, 117, 0.02) 100%) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    border: 1px solid rgba(39, 196, 121, 0.1) !important;
+    margin-bottom: 10px !important;
   }
 }
 
@@ -1067,8 +1124,6 @@ button, .action-buttons button {
 /* Responsive para el botón */
 @media (max-width: 768px) {
   .registration-button-container {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100%;
@@ -1089,9 +1144,17 @@ button, .action-buttons button {
 }
 
 @media (max-width: 640px) {
+  .countdown-container {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .countdown-card {
+    margin: 5px;
+  }
+  
   .registration-button-container {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
@@ -1113,6 +1176,25 @@ button, .action-buttons button {
   
   .button-icon {
     font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-card {
+    min-width: 35px !important;
+    padding: 4px 1px !important;
+  }
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 0.65rem !important;
+    line-height: 0.8rem !important;
+  }
+  .countdown-card .text-sm {
+    font-size: 0.4rem !important;
+    line-height: 0.6rem !important;
+  }
+  .countdown-grid {
+    gap: 1px !important;
   }
 }
 
