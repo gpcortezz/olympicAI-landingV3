@@ -487,7 +487,7 @@ onMounted(() => {
 
   const createGlobeInstance = (dimensions) => {
     globeInstance = createGlobe(el.value, {
-      devicePixelRatio: 2,
+      devicePixelRatio: 2.2,
       width: dimensions.width,
       height: dimensions.height,
       phi: 3,
@@ -503,7 +503,7 @@ onMounted(() => {
         { location: [32.5247, -117.0149], size: 0.1 },
       ],
       scale: dimensions.scale,
-      offset: [0, dimensions.height * 0.6],
+      offset: [dimensions.width * 0.05, dimensions.height * 0.5],
       onRender: (state) => {
         state.phi = phi.value;
         state.width = dimensions.width;

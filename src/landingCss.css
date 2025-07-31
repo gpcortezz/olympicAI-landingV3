@@ -899,7 +899,6 @@ button, .action-buttons button {
   overflow: hidden;
   z-index: 2;
   pointer-events: auto;
-  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -932,16 +931,17 @@ button, .action-buttons button {
   height: 100% !important;
   object-fit: cover;
   transform: translateY(0);
-  border-radius: 50%;
   transition: all 0.3s ease;
   opacity: 1 !important;
   visibility: visible !important;
+  background-color: transparent;
   display: block !important;
   position: relative !important;
   z-index: 2 !important;
   pointer-events: auto !important;
   touch-action: manipulation !important;
   cursor: grab !important;
+  margin: 0 auto;
 }
 
 /* Responsive globe */
