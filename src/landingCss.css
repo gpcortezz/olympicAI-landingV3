@@ -1,0 +1,1021 @@
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes logo-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 8px rgba(39, 196, 121, 0.5)) 
+            drop-shadow(0 0 15px rgba(39, 196, 121, 0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.8)) 
+            drop-shadow(0 0 20px rgba(39, 196, 121, 0.4));
+  }
+}
+
+/* Floating animation for images */
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Custom opacity classes for faded elements */
+.opacity-2 { opacity: 0.02; }
+.opacity-3 { opacity: 0.03; }
+.opacity-4 { opacity: 0.04; }
+.opacity-5 { opacity: 0.05; }
+
+/* Main layout with two containers */
+.max-w-screen-xl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 300px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (min-width: 1440px) {
+  .max-w-screen-xl {
+    gap: 300px;
+    max-width: 1600px;
+    padding: 0 3rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .max-w-screen-xl {
+    gap: 40px;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .max-w-screen-xl {
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+  }
+}
+
+/* Content Container */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+}
+
+@media (max-width: 1024px) {
+  .content-container {
+    gap: 16px;
+  }
+  .logo-container,
+  .main-title,
+  .description {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Countdown Wrapper */
+.countdown-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .max-w-screen-xl {
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+  }
+  
+  .content-container {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .countdown-wrapper {
+    order: 2;
+    width: 100%;
+  }
+  
+  .logo-container {
+    justify-content: center;
+  }
+  
+  .main-title {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .description {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .countdown-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .countdown-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px 10px;
+    margin-top: 0;
+    justify-self: center;
+  }
+  
+  /* Desactivar completamente efectos de hover en móviles para evitar superposición */
+  .countdown-card,
+  .countdown-card--main,
+  .countdown-card--light {
+    transition: none !important;
+  }
+  
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+    border: 2.5px solid #27c479 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-container {
+    justify-items: center !important;
+  }
+  .main-title,
+  .description {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .countdown-container {
+    justify-content: center !important;
+    display: flex !important;
+    width: 100% !important;
+  }
+  .countdown-grid {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-container {
+    padding: 0 0.5rem;
+  }
+  .logo-image {
+    height: 48px !important;
+  }
+  .main-title h1 {
+    font-size: 1.3rem !important;
+    line-height: 1.7rem !important;
+  }
+  .description p {
+    font-size: 0.95rem !important;
+    line-height: 1.2rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .countdown-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    overflow-x: unset !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    grid-template-columns: unset !important;
+    grid-template-rows: unset !important;
+    grid-template-areas: unset !important;
+  }
+  .countdown-card {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    padding: 6px 2px !important;
+  }
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 1.1rem !important;
+    line-height: 1.3rem !important;
+  }
+  .countdown-card .text-sm {
+    font-size: 0.7rem !important;
+    line-height: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .description p {
+    max-width: 320px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Responsive blobs and backgrounds */
+@media (max-width: 1024px) {
+  .bg-blur {
+    width: 250px !important;
+    height: 250px !important;
+  }
+}
+@media (max-width: 768px) {
+  .bg-blur {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+@media (max-width: 640px) {
+  .bg-blur {
+    width: 90px !important;
+    height: 90px !important;
+  }
+}
+
+/* Responsive decorative images */
+@media (max-width: 1024px) {
+  .decor-img {
+    width: 5rem !important;
+    height: 5rem !important;
+  }
+}
+@media (max-width: 768px) {
+  .decor-img {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+}
+@media (max-width: 640px) {
+  .decor-img {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+}
+
+.date-card {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  animation: float-pulse 4s ease-in-out infinite;
+}
+
+@keyframes float-pulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(39, 196, 121, 0.45);
+  }
+}
+
+@keyframes countdown-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.date-card:hover > div {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(39, 196, 121, 0.5) !important;
+  transition: all 0.3s ease;
+}
+
+.main-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
+
+.countdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: countdown-float 5s ease-in-out infinite;
+  padding-right: 1rem;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 15px 15px;
+  justify-self: center;
+  align-self: center;
+  grid-template-areas:
+    "dias horas"
+    "minutos segundos";
+}
+
+.countdown-card {
+  background: #101c1b;
+  border: 2px solid #27c479;
+  border-radius: 4px;
+  padding: 20px 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18);
+  transition: box-shadow 0.18s cubic-bezier(.4,0,.2,1), border-color 0.18s cubic-bezier(.4,0,.2,1), transform 0.18s cubic-bezier(.4,0,.2,1);
+  min-width: 100px;
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
+}
+
+.countdown-card:hover {
+  box-shadow: 0 8px 32px rgba(39, 196, 121, 0.7);
+  border-color: #27c479;
+  background: #162825;
+}
+.countdown-card:not(.countdown-card--up):hover {
+  transform: translateY(-5px);
+}
+.countdown-card.countdown-card--up:hover {
+  transform: translateY(-25px);
+}
+
+/* Fondo y hover para la carta principal (días) */
+.countdown-card--main {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.22) 0%, rgba(27, 112, 117, 0.13) 100%) !important;
+  border: 2.5px solid #27c479 !important;
+  box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
+}
+.countdown-card--main:hover {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.32) 0%, rgba(27, 112, 117, 0.18) 100%) !important;
+  box-shadow: 0 12px 40px rgba(39, 196, 121, 0.55) !important;
+  border-color: #27c479 !important;
+  transform: translateY(-8px) scale(1.06);
+}
+
+/* Fondo y hover para las cartas secundarias (horas, minutos, segundos) */
+.countdown-card--light {
+  background: rgba(30, 36, 40, 0.72) !important;
+  border: 2.5px solid rgba(200, 210, 220, 0.25) !important; /* borde gris claro opaco */
+  box-shadow: 0 2px 8px rgba(39, 196, 121, 0.10) !important;
+}
+.countdown-card--light:hover {
+  background: rgba(50, 56, 60, 0.88) !important;
+  border-color: #27c479 !important; /* verde en hover para coherencia visual */
+  box-shadow: 0 8px 32px rgba(39, 196, 121, 0.18) !important;
+  transform: translateY(-10px) scale(1.04);
+}
+
+.countdown-card--main, .countdown-card--light {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+  border: 2.5px solid #27c479 !important;
+  box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.countdown-card--main:hover, .countdown-card--light:hover {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.15) 0%, rgba(27, 112, 117, 0.08) 100%) !important;
+  box-shadow: 0 12px 40px rgba(39, 196, 121, 0.55) !important;
+  border-color: #27c479 !important;
+  transform: translateY(-8px) scale(1.06);
+}
+
+.date-card > div {
+  border-radius: 4px !important;
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif !important;
+}
+
+button, .action-buttons button {
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif !important;
+  letter-spacing: 0.04em;
+}
+
+.main-title h1, .main-title span {
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em;
+}
+
+.countdown-card .text-4xl, .countdown-card .text-5xl, .countdown-card .font-mono {
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.countdown-card--main .text-4xl,
+.countdown-card--main .text-5xl,
+.countdown-card--main .font-mono {
+  color: #27c479 !important;
+  text-shadow: 0 0 25px rgba(39, 196, 121, 0.7);
+}
+
+.countdown-card--light .text-4xl,
+.countdown-card--light .text-5xl,
+.countdown-card--light .font-mono {
+  color: #f5f7fa !important;
+  text-shadow: 0 0 18px rgb(250, 245, 245);
+}
+
+.logo-container {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.logo-image {
+  height: 100px; /* Aumenté el tamaño temporalmente */
+  width: auto;
+  object-fit: contain;
+  animation: logo-glow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.9)) 
+          drop-shadow(0 0 20px rgba(39, 196, 121, 0.5))
+          brightness(1.05);
+}
+
+@media (max-width: 768px) {
+  .countdown-container {
+    display: flex !important;
+    width: 100% !important;
+    margin: 1.5rem 0 0 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .countdown-grid {
+    width: 100% !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    grid-template-columns: unset !important;
+    grid-template-rows: unset !important;
+    grid-template-areas: unset !important;
+    gap: 2px !important;
+    overflow-x: hidden !important;
+  }
+  .countdown-card {
+    min-width: 45px !important;
+    flex: 1 1 0 !important;
+    padding: 6px 2px !important;
+  }
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 0.75rem !important;
+    line-height: 0.9rem !important;
+  }
+  .countdown-card .text-sm {
+    font-size: 0.5rem !important;
+    line-height: 0.7rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  .main,
+  .max-w-screen-xl,
+  .content-container,
+  .countdown-wrapper,
+  .countdown-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .max-w-screen-xl {
+    padding: 0 0.25rem !important;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 641px) {
+  /* Estilos específicos para 768px exactamente */
+  .countdown-card,
+  .countdown-card--main,
+  .countdown-card--light {
+    transition: none !important;
+  }
+  
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+    border: 2.5px solid #27c479 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-card:hover,
+  .countdown-card--main:hover,
+  .countdown-card--light:hover {
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.08) 0%, rgba(27, 112, 117, 0.05) 100%) !important;
+    border: 2.5px solid #27c479 !important;
+    box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18) !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .countdown-container {
+    background: linear-gradient(135deg, rgba(39, 196, 121, 0.03) 0%, rgba(27, 112, 117, 0.02) 100%) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    border: 1px solid rgba(39, 196, 121, 0.1) !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+/* Estilos para los fuegos artificiales */
+.firework-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  animation: firework-glow 0.5s ease-out;
+}
+
+@keyframes firework-glow {
+  0% {
+    box-shadow: 0 0 2px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 4px currentColor;
+  }
+}
+
+/* Efecto de brillo adicional para las partículas */
+.firework-particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0%, transparent 70%);
+  opacity: 0.3;
+  animation: firework-pulse 1s ease-out;
+}
+
+@keyframes firework-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Estilos para el botón de registro */
+.registration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.registration-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: button-appear 0.8s ease-out;
+}
+
+@keyframes button-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(39, 196, 121, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    border-color: rgba(39, 196, 121, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 12px 40px rgba(39, 196, 121, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+      0 0 20px rgba(39, 196, 121, 0.3);
+    border-color: rgba(39, 196, 121, 0.8);
+  }
+}
+
+@keyframes button-breath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes button-shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.registration-button {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.12) 0%, rgba(27, 112, 117, 0.08) 100%);
+  border: 1px solid rgba(39, 196, 121, 0.4);
+  border-radius: 8px;
+  padding: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  animation: button-breath 4s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.registration-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+
+
+.registration-button:hover {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.18) 0%, rgba(27, 112, 117, 0.12) 100%);
+  border-color: rgba(39, 196, 121, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 12px 40px rgba(39, 196, 121, 0.3),
+    0 0 20px rgba(39, 196, 121, 0.2);
+  animation-play-state: paused;
+}
+
+.registration-button:hover::before {
+  left: 100%;
+}
+
+.registration-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  color: #27c479;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.registration-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.button-text {
+  transition: transform 0.3s ease;
+}
+
+.button-icon {
+  font-size: 0.9rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+  filter: drop-shadow(0 0 2px rgba(39, 196, 121, 0.3));
+}
+
+.registration-link:hover .button-text {
+  transform: translateX(-2px);
+}
+
+.registration-link:hover .button-icon {
+  transform: translateX(3px);
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(39, 196, 121, 0.6));
+}
+
+/* Responsive para el botón */
+@media (max-width: 768px) {
+  .registration-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: fit-content !important;
+    display: flex;
+    margin: 0 auto 20px auto !important;
+    padding-right: 0 !important;
+  }
+  
+  .registration-button-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    display: flex;
+    animation: none;
+    margin-top: 0;
+    padding-right: 0 !important;
+  }
+  
+  .registration-button {
+    padding: 0;
+  }
+  
+  .registration-link {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-container {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .countdown-card {
+    margin: 5px;
+  }
+  
+  .registration-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: fit-content !important;
+    display: flex !important;
+    padding: 0 0.5rem;
+    margin: 0 auto 20px auto !important;
+  }
+  
+  .registration-button-container {
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    display: flex !important;
+    animation: none;
+    padding: 0 0.5rem;
+  }
+  
+  .registration-button {
+    width: auto;
+    max-width: 280px;
+  }
+  
+  .registration-link {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+  
+  .button-icon {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-card {
+    min-width: 35px !important;
+    padding: 4px 1px !important;
+  }
+  .countdown-card .text-4xl,
+  .countdown-card .text-5xl {
+    font-size: 0.65rem !important;
+    line-height: 0.8rem !important;
+  }
+  .countdown-card .text-sm {
+    font-size: 0.4rem !important;
+    line-height: 0.6rem !important;
+  }
+  .countdown-grid {
+    gap: 1px !important;
+  }
+  
+  .registration-link {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Globe container positioned at bottom */
+.globe-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  overflow: hidden;
+  z-index: 5;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  transform: translateY(0);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Responsive globe */
+@media (max-width: 1200px) {
+  .globe-container {
+    width: 600px;
+    height: 300px;
+  }
+  
+  .globe-wrapper {
+    width: 600px;
+    height: 300px;
+  }
+  
+  .globe-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .globe-container {
+    width: 500px;
+    height: 250px;
+  }
+  
+  .globe-wrapper {
+    width: 500px;
+    height: 250px;
+  }
+  
+  .globe-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .globe-container {
+    width: 400px;
+    height: 200px;
+  }
+  
+  .globe-wrapper {
+    width: 400px;
+    height: 200px;
+  }
+  
+  .globe-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Animación de salida para el countdown */
+.countdown-container {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.countdown-container.fade-out {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+}
+
+/* Asegura que html, body y #app ocupen todo el alto */
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* El div raíz debe ocupar todo el alto */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Centrado del main */
+main {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+}
+
+#light {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+#light canvas {
+	background-color: transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+}
