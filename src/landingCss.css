@@ -46,6 +46,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
+  pointer-events: none;
 }
 
 @media (min-width: 1440px) {
@@ -78,6 +79,7 @@
   flex-direction: column;
   gap: 24px;
   max-width: 800px;
+  pointer-events: auto;
 }
 
 @media (max-width: 1024px) {
@@ -97,6 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
 
 @media (max-width: 768px) {
@@ -894,11 +897,26 @@ button, .action-buttons button {
   width: 800px;
   height: 400px;
   overflow: hidden;
-  z-index: 5;
+  z-index: 2;
   pointer-events: auto;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Asegurar que el globo reciba eventos */
+  touch-action: manipulation;
+}
+
+/* Área de interacción específica para el globo */
+.globe-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .globe-wrapper {
@@ -918,6 +936,12 @@ button, .action-buttons button {
   transition: all 0.3s ease;
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
+  position: relative !important;
+  z-index: 2 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  cursor: grab !important;
 }
 
 /* Responsive globe */
@@ -1000,6 +1024,7 @@ main {
   align-items: center !important;
   justify-content: center !important;
   min-height: 100vh !important;
+  pointer-events: none !important;
 }
 
 #light {

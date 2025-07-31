@@ -16,6 +16,26 @@
       </div>
     </div>
     
+    <!-- Globe positioned at bottom - moved outside main container -->
+    <div class="globe-container">
+      <canvas 
+        ref="el"
+        @pointerdown="onPointerDown"
+        @pointerup="onPointerUp"
+        @pointerout="onPointerOut"
+        @mousemove="onMouseMove"
+        @touchmove="onTouchMove"
+        :style="{ 
+          width: '100%', 
+          height: '100%', 
+          cursor: pointerInteracting ? 'grabbing' : 'grab',
+          contain: 'layout paint size',
+          opacity: 0,
+          transition: 'opacity 1s ease'
+        }"
+      ></canvas>
+    </div>
+    
     <!-- Main content with two containers -->
     <main class="relative z-10 px-6 flex-1 flex items-center justify-center">
       <div class="max-w-screen-xl mx-auto w-full h-full flex items-center justify-center">
@@ -48,25 +68,6 @@
           </div>
         </div>
 
-        <!-- Globe positioned at bottom -->
-        <div class="globe-container">
-          <canvas 
-            ref="el"
-            @pointerdown="onPointerDown"
-            @pointerup="onPointerUp"
-            @pointerout="onPointerOut"
-            @mousemove="onMouseMove"
-            @touchmove="onTouchMove"
-            :style="{ 
-              width: '100%', 
-              height: '100%', 
-              cursor: pointerInteracting ? 'grabbing' : 'grab',
-              contain: 'layout paint size',
-              opacity: 0,
-              transition: 'opacity 1s ease'
-            }"
-          ></canvas>
-        </div>
         <!-- Countdown Container -->
         <div class="countdown-wrapper">
           <div v-if="showCountdown" class="countdown-container">
@@ -489,12 +490,12 @@ onMounted(() => {
       devicePixelRatio: 2,
       width: dimensions.width,
       height: dimensions.height,
-      phi: 0,
-      theta: 0.3,
+      phi: 3,
+      theta: 6.25,
       dark: 1,
       diffuse: 3,
-      mapSamples: 16000,
-      mapBrightness: 1.2,
+      mapSamples: 35000,
+      mapBrightness: 1,
       baseColor: [0.15, 0.77, 0.47],
       markerColor: [0.29, 0.83, 0.65],
       glowColor: [0.21, 0.44, 0.41],
@@ -522,8 +523,19 @@ onMounted(() => {
   setTimeout(() => {
     if (el.value) {
       el.value.style.opacity = '1';
+      el.value.style.visibility = 'visible';
+      el.value.style.display = 'block';
     }
-  }, 100);
+  }, 500);
+
+  // Backup timeout to ensure canvas is visible
+  setTimeout(() => {
+    if (el.value) {
+      el.value.style.opacity = '1';
+      el.value.style.visibility = 'visible';
+      el.value.style.display = 'block';
+    }
+  }, 1000);
 
   // Add resize listener
   window.addEventListener('resize', onResize);
