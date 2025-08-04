@@ -41,56 +41,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 300px;
+  gap: 450px; /* Aumentado aún más para componentes más grandes */
   width: 100%;
-  max-width: 1400px;
+  max-width: 2100px; /* Aumentado aún más para componentes más grandes */
   margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Glassmorphic card container */
-.glassmorphic-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 300px;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 3rem;
-  background: rgba(16, 28, 27, 0.08);
-  border: 1px solid rgba(39, 196, 121, 0.15);
-  border-radius: 24px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.05),
-    0 16px 64px rgba(39, 196, 121, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  animation: glassmorphic-float 8s ease-in-out infinite;
-}
-
-@keyframes glassmorphic-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  padding: 0 3rem; /* Aumentado aún más para componentes más grandes */
 }
 
 @media (min-width: 1440px) {
   .max-w-screen-xl {
-    gap: 300px;
-    max-width: 1600px;
-    padding: 0 3rem;
+    gap: 450px; /* Aumentado aún más para componentes más grandes */
+    max-width: 2400px; /* Aumentado aún más para componentes más grandes */
+    padding: 0 4.5rem; /* Aumentado aún más para componentes más grandes */
   }
   
-  .glassmorphic-card {
-    gap: 300px;
-    max-width: 1600px;
-    padding: 4rem;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -99,11 +63,6 @@
     padding: 0 1rem;
   }
   
-  .glassmorphic-card {
-    gap: 40px;
-    padding: 2rem;
-    flex-direction: column;
-  }
 }
 
 @media (max-width: 768px) {
@@ -112,14 +71,6 @@
     gap: 40px;
     justify-content: center;
   }
-  
-  .glassmorphic-card {
-    flex-direction: column;
-    gap: 40px;
-    justify-content: center;
-    padding: 1.5rem;
-    border-radius: 20px;
-  }
 }
 
 /* Content Container */
@@ -127,8 +78,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 600px;
+  gap: 36px; /* Aumentado aún más para componentes más grandes */
+  max-width: 900px; /* Aumentado aún más para componentes más grandes */
 }
 
 @media (max-width: 1024px) {
@@ -181,7 +132,7 @@
 }
 
 .logo-image {
-  height: 100px; /* Aumenté el tamaño temporalmente */
+  height: 150px; /* Aumentado aún más para componentes más grandes */
   width: auto;
   object-fit: contain;
   animation: logo-glow 3s ease-in-out infinite;
@@ -297,15 +248,15 @@
     padding: 0 0.5rem;
   }
   .logo-image {
-    height: 48px !important;
+    height: 72px !important; /* Aumentado aún más para componentes más grandes */
   }
   .main-title h1 {
-    font-size: 1.3rem !important;
-    line-height: 1.7rem !important;
+    font-size: 1.95rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 2.55rem !important; /* Aumentado aún más para componentes más grandes */
   }
   .description p {
-    font-size: 0.95rem !important;
-    line-height: 1.2rem !important;
+    font-size: 1.425rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.8rem !important; /* Aumentado aún más para componentes más grandes */
     max-width: 100% !important;
     width: 100% !important;
   }
@@ -325,16 +276,17 @@
     flex: 1 1 0 !important;
     min-width: 0 !important;
     width: auto !important;
-    padding: 6px 2px !important;
+    padding: 8px 3px !important; /* Aumentado padding vertical para mantener proporción rectangular */
+    min-height: 80px !important; /* Añadido para mantener altura en móviles */
   }
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 1.1rem !important;
-    line-height: 1.3rem !important;
+    font-size: 1.65rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.95rem !important; /* Aumentado aún más para componentes más grandes */
   }
   .countdown-card .text-sm {
-    font-size: 0.7rem !important;
-    line-height: 1rem !important;
+    font-size: 1.05rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.5rem !important; /* Aumentado aún más para componentes más grandes */
   }
 }
 
@@ -448,7 +400,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 15px 15px;
+  gap: 24px 24px; /* Aumentado aún más para componentes más grandes */
   justify-self: center;
   align-self: center;
   grid-template-areas:
@@ -458,15 +410,16 @@
 
 .countdown-card {
   background: rgba(16, 28, 27, 0.3);
-  border: 2px solid rgba(39, 196, 121, 0.4);
-  border-radius: 12px;
-  padding: 20px 12px;
+  border: 3px solid rgba(39, 196, 121, 0.4); /* Aumentado aún más para componentes más grandes */
+  border-radius: 9px; /* Mitad del redondeado original (18px/2) */
+  padding: 40px 15px; /* Modificado para hacer cartas rectangulares con eje Y largo */
   text-align: center;
   box-shadow: 
     0 2px 8px rgba(39, 196, 121, 0.18),
     0 8px 32px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.18s cubic-bezier(.4,0,.2,1), border-color 0.18s cubic-bezier(.4,0,.2,1), transform 0.18s cubic-bezier(.4,0,.2,1);
-  min-width: 100px;
+  min-width: 120px; /* Reducido para hacer cartas más estrechas */
+  min-height: 160px; /* Añadido para hacer cartas más altas */
   font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -495,7 +448,7 @@
     0 16px 48px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(15px) !important;
   -webkit-backdrop-filter: blur(15px) !important;
-  border-radius: 12px;
+  border-radius: 6px; /* Mitad del redondeado original (12px/2) */
 }
 .countdown-card--main:hover {
   background: rgba(39, 196, 121, 0.25) !important;
@@ -515,7 +468,7 @@
     0 8px 24px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border-radius: 12px;
+  border-radius: 6px; /* Mitad del redondeado original (12px/2) */
 }
 .countdown-card--light:hover {
   background: rgba(50, 56, 60, 0.5) !important;
@@ -528,13 +481,13 @@
 
 .countdown-card--main, .countdown-card--light {
   background: rgba(39, 196, 121, 0.08) !important;
-  border: 2.5px solid rgba(39, 196, 121, 0.5) !important;
+  border: 3.5px solid rgba(39, 196, 121, 0.5) !important; /* Aumentado aún más para componentes más grandes */
   box-shadow: 
     0 8px 32px rgba(39, 196, 121, 0.35) !important,
     0 16px 48px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-radius: 12px;
+  border-radius: 9px; /* Mitad del redondeado original (18px/2) */
 }
 .countdown-card--main:hover, .countdown-card--light:hover {
   background: rgba(39, 196, 121, 0.15) !important;
@@ -593,7 +546,7 @@ button, .action-buttons button {
 }
 
 .logo-image {
-  height: 100px; /* Aumenté el tamaño temporalmente */
+  height: 150px; /* Aumentado aún más para componentes más grandes */
   width: auto;
   object-fit: contain;
   animation: logo-glow 3s ease-in-out infinite;
@@ -637,18 +590,18 @@ button, .action-buttons button {
     overflow-x: hidden !important;
   }
   .countdown-card {
-    min-width: 45px !important;
+    min-width: 67px !important; /* Aumentado aún más para componentes más grandes */
     flex: 1 1 0 !important;
-    padding: 6px 2px !important;
+    padding: 9px 3px !important; /* Aumentado aún más para componentes más grandes */
   }
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 0.75rem !important;
-    line-height: 0.9rem !important;
+    font-size: 1.125rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.35rem !important; /* Aumentado aún más para componentes más grandes */
   }
   .countdown-card .text-sm {
-    font-size: 0.5rem !important;
-    line-height: 0.7rem !important;
+    font-size: 0.75rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.05rem !important; /* Aumentado aún más para componentes más grandes */
   }
 }
 
@@ -880,11 +833,11 @@ button, .action-buttons button {
 .registration-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 24px;
+  gap: 12px; /* Aumentado aún más para componentes más grandes */
+  padding: 22px 36px; /* Aumentado aún más para componentes más grandes */
   color: #27c479;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.65rem; /* Aumentado aún más para componentes más grandes */
   font-weight: 600;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -957,6 +910,7 @@ button, .action-buttons button {
 
   .countdown-card {
     margin: 5px;
+    min-height: 90px !important; /* Añadido para mantener altura en pantallas medianas */
   }
   
   .registration-container {
@@ -995,25 +949,26 @@ button, .action-buttons button {
 
 @media (max-width: 480px) {
   .countdown-card {
-    min-width: 35px !important;
-    padding: 4px 1px !important;
+    min-width: 45px !important; /* Reducido para hacer cartas más estrechas */
+    min-height: 70px !important; /* Añadido para mantener altura en pantallas pequeñas */
+    padding: 8px 2px !important; /* Aumentado padding vertical para mantener proporción rectangular */
   }
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 0.65rem !important;
-    line-height: 0.8rem !important;
+    font-size: 0.975rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 1.2rem !important; /* Aumentado aún más para componentes más grandes */
   }
   .countdown-card .text-sm {
-    font-size: 0.4rem !important;
-    line-height: 0.6rem !important;
+    font-size: 0.6rem !important; /* Aumentado aún más para componentes más grandes */
+    line-height: 0.9rem !important; /* Aumentado aún más para componentes más grandes */
   }
   .countdown-grid {
-    gap: 1px !important;
+    gap: 1.5px !important; /* Aumentado aún más para componentes más grandes */
   }
   
   .registration-link {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 12px 21px; /* Aumentado aún más para componentes más grandes */
+    font-size: 1.275rem; /* Aumentado aún más para componentes más grandes */
   }
 }
 
