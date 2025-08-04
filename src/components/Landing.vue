@@ -26,11 +26,7 @@
       
       <!-- Animated light rays -->
       <div class="header-light-rays">
-        <div class="header-ray header-ray-1"></div>
-        <div class="header-ray header-ray-2"></div>
-        <div class="header-ray header-ray-3"></div>
-        <div class="header-ray header-ray-4"></div>
-        <div class="header-ray header-ray-5"></div>
+
       </div>
       
       <!-- Energy waves -->

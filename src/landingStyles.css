@@ -36,71 +36,38 @@
 .opacity-4 { opacity: 0.04; }
 .opacity-5 { opacity: 0.05; }
 
-/* Main layout with two containers */
+/* Main layout with two containers - IMPROVED RESPONSIVE */
 .max-w-screen-xl {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 450px; /* Aumentado aún más para componentes más grandes */
+  gap: clamp(40px, 8vw, 450px); /* Responsive gap */
   width: 100%;
-  max-width: 2100px; /* Aumentado aún más para componentes más grandes */
+  max-width: min(2100px, 95vw); /* Responsive max-width */
   margin: 0 auto;
-  padding: 0 3rem; /* Aumentado aún más para componentes más grandes */
+  padding: 0 clamp(1rem, 4vw, 3rem); /* Responsive padding */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-@media (min-width: 1440px) {
-  .max-w-screen-xl {
-    gap: 450px; /* Aumentado aún más para componentes más grandes */
-    max-width: 2400px; /* Aumentado aún más para componentes más grandes */
-    padding: 0 4.5rem; /* Aumentado aún más para componentes más grandes */
-  }
-  
-}
-
-@media (max-width: 1024px) {
-  .max-w-screen-xl {
-    gap: 40px;
-    padding: 0 1rem;
-  }
-  
-}
-
-@media (max-width: 768px) {
-  .max-w-screen-xl {
-    flex-direction: column;
-    gap: 40px;
-    justify-content: center;
-  }
-}
-
-/* Content Container */
+/* Content Container - IMPROVED RESPONSIVE */
 .content-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 36px; /* Aumentado aún más para componentes más grandes */
-  max-width: 900px; /* Aumentado aún más para componentes más grandes */
-}
-
-@media (max-width: 1024px) {
-  .content-container {
-    gap: 16px;
-  }
-  .logo-container,
-  .main-title,
-  .description {
-    padding-left: 0.5rem;
-  }
+  gap: clamp(16px, 3vw, 36px); /* Responsive gap */
+  max-width: min(900px, 90vw); /* Responsive max-width */
+  min-width: 0; /* Prevent overflow */
 }
 
 /* Floating animations for text content */
 .logo-container {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 1rem;
+  padding-left: clamp(0.5rem, 2vw, 1rem);
   animation: float-gentle 6s ease-in-out infinite;
 }
 
@@ -108,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 1rem;
+  padding-left: clamp(0.5rem, 2vw, 1rem);
   animation: float-gentle 6s ease-in-out infinite;
   animation-delay: 0.5s;
 }
@@ -117,7 +84,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 1rem;
+  padding-left: clamp(0.5rem, 2vw, 1rem);
   animation: float-gentle 6s ease-in-out infinite;
   animation-delay: 1s;
 }
@@ -132,7 +99,7 @@
 }
 
 .logo-image {
-  height: 150px; /* Aumentado aún más para componentes más grandes */
+  height: clamp(80px, 15vw, 150px); /* Responsive height */
   width: auto;
   object-fit: contain;
   animation: logo-glow 3s ease-in-out infinite;
@@ -147,7 +114,7 @@
           brightness(1.05);
 }
 
-/* Countdown Wrapper */
+/* Countdown Wrapper - IMPROVED RESPONSIVE */
 .countdown-wrapper {
   flex-shrink: 0;
   display: flex;
@@ -155,13 +122,45 @@
   justify-content: center;
   animation: float-gentle 6s ease-in-out infinite;
   animation-delay: 1.5s;
+  min-width: 0; /* Prevent overflow */
+}
+
+/* IMPROVED RESPONSIVE BREAKPOINTS */
+@media (max-width: 1200px) {
+  .max-w-screen-xl {
+    gap: clamp(30px, 6vw, 60px);
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  
+  .content-container {
+    gap: clamp(12px, 2.5vw, 24px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .max-w-screen-xl {
+    gap: clamp(20px, 4vw, 40px);
+    padding: 0 clamp(0.75rem, 2vw, 1.5rem);
+  }
+  
+  .content-container {
+    gap: clamp(10px, 2vw, 16px);
+  }
+  
+  .logo-container,
+  .main-title,
+  .description {
+    padding-left: clamp(0.25rem, 1vw, 0.5rem);
+  }
 }
 
 @media (max-width: 768px) {
   .max-w-screen-xl {
     flex-direction: column;
-    gap: 24px;
+    gap: clamp(20px, 4vw, 40px);
     justify-content: center;
+    padding: clamp(1rem, 3vw, 2rem);
+    min-height: auto;
   }
   
   .content-container {
@@ -169,6 +168,7 @@
     align-items: center;
     text-align: center;
     max-width: 100%;
+    gap: clamp(12px, 3vw, 20px);
   }
   
   .countdown-wrapper {
@@ -195,13 +195,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: clamp(0.5rem, 2vw, 1rem);
   }
   
   .countdown-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 10px 10px;
+    gap: clamp(8px, 2vw, 10px);
     margin-top: 0;
     justify-self: center;
   }
@@ -224,118 +224,180 @@
 }
 
 @media (max-width: 640px) {
+  .max-w-screen-xl {
+    padding: clamp(0.5rem, 2vw, 1rem);
+    gap: clamp(15px, 3vw, 30px);
+  }
+  
+  .content-container {
+    gap: clamp(8px, 2vw, 16px);
+  }
+  
   .grid-container {
     justify-items: center !important;
   }
+  
   .main-title,
   .description {
     text-align: center !important;
     justify-content: center !important;
   }
+  
   .countdown-container {
     justify-content: center !important;
     display: flex !important;
     width: 100% !important;
   }
+  
   .countdown-grid {
     justify-content: center !important;
     width: 100% !important;
   }
 }
 
+@media (max-width: 480px) {
+  .max-w-screen-xl {
+    padding: clamp(0.25rem, 1vw, 0.75rem);
+    gap: clamp(10px, 2vw, 20px);
+  }
+  
+  .content-container {
+    gap: clamp(6px, 1.5vw, 12px);
+  }
+  
+  .logo-container,
+  .main-title,
+  .description {
+    padding-left: 0;
+  }
+}
+
+/* IMPROVED MOBILE RESPONSIVE STYLES */
 @media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  
+  .main,
+  .max-w-screen-xl,
+  .content-container,
+  .countdown-wrapper,
+  .countdown-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .max-w-screen-xl {
+    padding: clamp(0.25rem, 1vw, 0.5rem) !important;
+  }
+  
   .grid-container {
-    padding: 0 0.5rem;
+    padding: 0 clamp(0.25rem, 1vw, 0.5rem);
   }
+  
   .logo-image {
-    height: 72px !important; /* Aumentado aún más para componentes más grandes */
+    height: clamp(60px, 12vw, 72px) !important;
   }
+  
   .main-title h1 {
-    font-size: 1.95rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 2.55rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(1.5rem, 5vw, 1.95rem) !important;
+    line-height: clamp(1.8rem, 6vw, 2.55rem) !important;
   }
+  
   .description p {
-    font-size: 1.425rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.8rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(1.1rem, 4vw, 1.425rem) !important;
+    line-height: clamp(1.4rem, 5vw, 1.8rem) !important;
     max-width: 100% !important;
     width: 100% !important;
   }
+  
   .countdown-grid {
     display: flex !important;
     flex-direction: row !important;
     width: 100% !important;
-    overflow-x: unset !important;
-    gap: 4px !important;
+    overflow-x: hidden !important;
+    gap: clamp(2px, 1vw, 4px) !important;
     min-width: 0 !important;
     margin: 0 !important;
     grid-template-columns: unset !important;
     grid-template-rows: unset !important;
     grid-template-areas: unset !important;
   }
+  
   .countdown-card {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     width: auto !important;
-    padding: 8px 3px !important; /* Aumentado padding vertical para mantener proporción rectangular */
-    min-height: 80px !important; /* Añadido para mantener altura en móviles */
+    padding: clamp(6px, 2vw, 8px) clamp(2px, 1vw, 3px) !important;
+    min-height: clamp(60px, 15vw, 80px) !important;
   }
+  
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 1.65rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.95rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(1.2rem, 4vw, 1.65rem) !important;
+    line-height: clamp(1.4rem, 5vw, 1.95rem) !important;
   }
+  
   .countdown-card .text-sm {
-    font-size: 1.05rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.5rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(0.8rem, 3vw, 1.05rem) !important;
+    line-height: clamp(1.1rem, 4vw, 1.5rem) !important;
   }
 }
 
 @media (max-width: 640px) {
   .description p {
-    max-width: 320px !important;
+    max-width: clamp(280px, 90vw, 320px) !important;
     width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
 
-/* Responsive blobs and backgrounds */
+/* Responsive blobs and backgrounds - IMPROVED */
 @media (max-width: 1024px) {
   .bg-blur {
-    width: 250px !important;
-    height: 250px !important;
-  }
-}
-@media (max-width: 768px) {
-  .bg-blur {
-    width: 160px !important;
-    height: 160px !important;
-  }
-}
-@media (max-width: 640px) {
-  .bg-blur {
-    width: 90px !important;
-    height: 90px !important;
+    width: clamp(200px, 25vw, 250px) !important;
+    height: clamp(200px, 25vw, 250px) !important;
   }
 }
 
-/* Responsive decorative images */
+@media (max-width: 768px) {
+  .bg-blur {
+    width: clamp(120px, 20vw, 160px) !important;
+    height: clamp(120px, 20vw, 160px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .bg-blur {
+    width: clamp(60px, 15vw, 90px) !important;
+    height: clamp(60px, 15vw, 90px) !important;
+  }
+}
+
+/* Responsive decorative images - IMPROVED */
 @media (max-width: 1024px) {
   .decor-img {
-    width: 5rem !important;
-    height: 5rem !important;
+    width: clamp(3rem, 6vw, 5rem) !important;
+    height: clamp(3rem, 6vw, 5rem) !important;
   }
 }
+
 @media (max-width: 768px) {
   .decor-img {
-    width: 3.5rem !important;
-    height: 3.5rem !important;
+    width: clamp(2.5rem, 5vw, 3.5rem) !important;
+    height: clamp(2.5rem, 5vw, 3.5rem) !important;
   }
 }
+
 @media (max-width: 640px) {
   .decor-img {
-    width: 2rem !important;
-    height: 2rem !important;
+    width: clamp(1.5rem, 4vw, 2rem) !important;
+    height: clamp(1.5rem, 4vw, 2rem) !important;
   }
 }
 
@@ -400,7 +462,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 24px 24px; /* Aumentado aún más para componentes más grandes */
+  gap: clamp(12px, 3vw, 24px); /* Responsive gap */
   justify-self: center;
   align-self: center;
   grid-template-areas:
@@ -410,16 +472,16 @@
 
 .countdown-card {
   background: rgba(16, 28, 27, 0.3);
-  border: 3px solid rgba(39, 196, 121, 0.4); /* Aumentado aún más para componentes más grandes */
-  border-radius: 9px; /* Mitad del redondeado original (18px/2) */
-  padding: 40px 15px; /* Modificado para hacer cartas rectangulares con eje Y largo */
+  border: clamp(2px, 0.5vw, 3px) solid rgba(39, 196, 121, 0.4); /* Responsive border */
+  border-radius: clamp(6px, 1.5vw, 9px); /* Responsive border radius */
+  padding: clamp(20px, 5vw, 40px) clamp(8px, 2vw, 15px); /* Responsive padding */
   text-align: center;
   box-shadow: 
     0 2px 8px rgba(39, 196, 121, 0.18),
     0 8px 32px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.18s cubic-bezier(.4,0,.2,1), border-color 0.18s cubic-bezier(.4,0,.2,1), transform 0.18s cubic-bezier(.4,0,.2,1);
-  min-width: 120px; /* Reducido para hacer cartas más estrechas */
-  min-height: 160px; /* Añadido para hacer cartas más altas */
+  min-width: clamp(80px, 15vw, 120px); /* Responsive min-width */
+  min-height: clamp(100px, 20vw, 160px); /* Responsive min-height */
   font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -442,13 +504,13 @@
 /* Fondo y hover para la carta principal (días) */
 .countdown-card--main {
   background: rgba(39, 196, 121, 0.15) !important;
-  border: 2.5px solid rgba(39, 196, 121, 0.6) !important;
+  border: clamp(1.5px, 0.4vw, 2.5px) solid rgba(39, 196, 121, 0.6) !important;
   box-shadow: 
     0 8px 32px rgba(39, 196, 121, 0.35) !important,
     0 16px 48px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(15px) !important;
   -webkit-backdrop-filter: blur(15px) !important;
-  border-radius: 6px; /* Mitad del redondeado original (12px/2) */
+  border-radius: clamp(4px, 1vw, 6px); /* Responsive border radius */
 }
 .countdown-card--main:hover {
   background: rgba(39, 196, 121, 0.25) !important;
@@ -462,13 +524,13 @@
 /* Fondo y hover para las cartas secundarias (horas, minutos, segundos) */
 .countdown-card--light {
   background: rgba(30, 36, 40, 0.4) !important;
-  border: 2.5px solid rgba(200, 210, 220, 0.3) !important;
+  border: clamp(1.5px, 0.4vw, 2.5px) solid rgba(200, 210, 220, 0.3) !important;
   box-shadow: 
     0 2px 8px rgba(39, 196, 121, 0.10) !important,
     0 8px 24px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border-radius: 6px; /* Mitad del redondeado original (12px/2) */
+  border-radius: clamp(4px, 1vw, 6px); /* Responsive border radius */
 }
 .countdown-card--light:hover {
   background: rgba(50, 56, 60, 0.5) !important;
@@ -481,13 +543,13 @@
 
 .countdown-card--main, .countdown-card--light {
   background: rgba(39, 196, 121, 0.08) !important;
-  border: 3.5px solid rgba(39, 196, 121, 0.5) !important; /* Aumentado aún más para componentes más grandes */
+  border: clamp(2px, 0.6vw, 3.5px) solid rgba(39, 196, 121, 0.5) !important; /* Responsive border */
   box-shadow: 
     0 8px 32px rgba(39, 196, 121, 0.35) !important,
     0 16px 48px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-radius: 9px; /* Mitad del redondeado original (18px/2) */
+  border-radius: clamp(6px, 1.5vw, 9px); /* Responsive border radius */
 }
 .countdown-card--main:hover, .countdown-card--light:hover {
   background: rgba(39, 196, 121, 0.15) !important;
@@ -586,22 +648,22 @@ button, .action-buttons button {
     grid-template-columns: unset !important;
     grid-template-rows: unset !important;
     grid-template-areas: unset !important;
-    gap: 2px !important;
+    gap: clamp(1px, 0.5vw, 2px) !important;
     overflow-x: hidden !important;
   }
   .countdown-card {
-    min-width: 67px !important; /* Aumentado aún más para componentes más grandes */
+    min-width: clamp(50px, 15vw, 67px) !important; /* Responsive min-width */
     flex: 1 1 0 !important;
-    padding: 9px 3px !important; /* Aumentado aún más para componentes más grandes */
+    padding: clamp(6px, 2vw, 9px) clamp(2px, 1vw, 3px) !important; /* Responsive padding */
   }
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 1.125rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.35rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(0.9rem, 3vw, 1.125rem) !important; /* Responsive font size */
+    line-height: clamp(1.1rem, 3.5vw, 1.35rem) !important; /* Responsive line height */
   }
   .countdown-card .text-sm {
-    font-size: 0.75rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.05rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(0.6rem, 2.5vw, 0.75rem) !important; /* Responsive font size */
+    line-height: clamp(0.8rem, 3vw, 1.05rem) !important; /* Responsive line height */
   }
 }
 
@@ -833,11 +895,11 @@ button, .action-buttons button {
 .registration-link {
   display: flex;
   align-items: center;
-  gap: 12px; /* Aumentado aún más para componentes más grandes */
-  padding: 22px 36px; /* Aumentado aún más para componentes más grandes */
+  gap: clamp(8px, 2vw, 12px); /* Responsive gap */
+  padding: clamp(12px, 3vw, 22px) clamp(20px, 4vw, 36px); /* Responsive padding */
   color: #27c479;
   text-decoration: none;
-  font-size: 1.65rem; /* Aumentado aún más para componentes más grandes */
+  font-size: clamp(1rem, 3vw, 1.65rem); /* Responsive font size */
   font-weight: 600;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -909,8 +971,8 @@ button, .action-buttons button {
   }
 
   .countdown-card {
-    margin: 5px;
-    min-height: 90px !important; /* Añadido para mantener altura en pantallas medianas */
+    margin: clamp(2px, 1vw, 5px);
+    min-height: clamp(70px, 18vw, 90px) !important; /* Responsive height */
   }
   
   .registration-container {
@@ -918,8 +980,8 @@ button, .action-buttons button {
     align-items: center !important;
     width: fit-content !important;
     display: flex !important;
-    padding: 0 0.5rem;
-    margin: 0 auto 20px auto !important;
+    padding: 0 clamp(0.25rem, 1vw, 0.5rem);
+    margin: 0 auto clamp(10px, 3vw, 20px) auto !important;
   }
   
   .registration-button-container {
@@ -928,47 +990,47 @@ button, .action-buttons button {
     width: 100% !important;
     display: flex !important;
     animation: none;
-    padding: 0 0.5rem;
+    padding: 0 clamp(0.25rem, 1vw, 0.5rem);
   }
   
   .registration-button {
     width: auto;
-    max-width: 280px;
+    max-width: clamp(250px, 80vw, 280px);
   }
   
   .registration-link {
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 16px);
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     justify-content: center;
   }
   
   .button-icon {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
 }
 
 @media (max-width: 480px) {
   .countdown-card {
-    min-width: 45px !important; /* Reducido para hacer cartas más estrechas */
-    min-height: 70px !important; /* Añadido para mantener altura en pantallas pequeñas */
-    padding: 8px 2px !important; /* Aumentado padding vertical para mantener proporción rectangular */
+    min-width: clamp(35px, 12vw, 45px) !important; /* Responsive min-width */
+    min-height: clamp(50px, 15vw, 70px) !important; /* Responsive min-height */
+    padding: clamp(6px, 2vw, 8px) clamp(1px, 1vw, 2px) !important; /* Responsive padding */
   }
   .countdown-card .text-4xl,
   .countdown-card .text-5xl {
-    font-size: 0.975rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 1.2rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(0.8rem, 3vw, 0.975rem) !important; /* Responsive font size */
+    line-height: clamp(1rem, 3.5vw, 1.2rem) !important; /* Responsive line height */
   }
   .countdown-card .text-sm {
-    font-size: 0.6rem !important; /* Aumentado aún más para componentes más grandes */
-    line-height: 0.9rem !important; /* Aumentado aún más para componentes más grandes */
+    font-size: clamp(0.5rem, 2.5vw, 0.6rem) !important; /* Responsive font size */
+    line-height: clamp(0.7rem, 3vw, 0.9rem) !important; /* Responsive line height */
   }
   .countdown-grid {
-    gap: 1.5px !important; /* Aumentado aún más para componentes más grandes */
+    gap: clamp(1px, 0.5vw, 1.5px) !important; /* Responsive gap */
   }
   
   .registration-link {
-    padding: 12px 21px; /* Aumentado aún más para componentes más grandes */
-    font-size: 1.275rem; /* Aumentado aún más para componentes más grandes */
+    padding: clamp(8px, 2.5vw, 12px) clamp(15px, 4vw, 21px); /* Responsive padding */
+    font-size: clamp(0.9rem, 3.5vw, 1.275rem); /* Responsive font size */
   }
 }
 
@@ -987,6 +1049,8 @@ html, body, #app {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box;
 }
 
 /* El div raíz debe ocupar todo el alto */
@@ -1000,6 +1064,10 @@ main {
   align-items: center !important;
   justify-content: center !important;
   min-height: 100vh !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
 }
 
 /* Spatial Footer Styles */
@@ -1008,7 +1076,7 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 200px;
+  height: 300px; /* Increased from 200px to 300px for more range */
   z-index: 5;
   pointer-events: none;
   overflow: hidden;
@@ -1020,7 +1088,7 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  height: 200px;
+  height: 300px; /* Increased from 200px to 300px for more range */
   z-index: 5;
   pointer-events: none;
   overflow: hidden;
@@ -1134,111 +1202,6 @@ main {
     opacity: 0.7;
     transform: scaleY(1.05);
   }
-}
-
-/* Light rays */
-.light-rays {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-}
-
-.header-light-rays {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-}
-
-.ray {
-  position: absolute;
-  bottom: 0;
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(
-    to top,
-    rgba(39, 196, 121, 0.25) 0%,
-    rgba(74, 222, 128, 0.2) 30%,
-    rgba(27, 112, 117, 0.15) 60%,
-    transparent 100%
-  );
-  transform-origin: bottom;
-  animation: ray-rotate 12s ease-in-out infinite;
-  box-shadow: 
-    0 0 3px rgba(39, 196, 121, 0.2),
-    0 0 6px rgba(39, 196, 121, 0.1);
-}
-
-.header-ray {
-  position: absolute;
-  top: 0;
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(
-    to bottom,
-    rgba(39, 196, 121, 0.25) 0%,
-    rgba(74, 222, 128, 0.2) 30%,
-    rgba(27, 112, 117, 0.15) 60%,
-    transparent 100%
-  );
-  transform-origin: top;
-  animation: header-ray-rotate 12s ease-in-out infinite;
-  box-shadow: 
-    0 0 3px rgba(39, 196, 121, 0.2),
-    0 0 6px rgba(39, 196, 121, 0.1);
-}
-
-.ray-1 {
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.ray-2 {
-  left: 25%;
-  animation-delay: 0s;
-}
-
-.ray-3 {
-  left: 40%;
-  animation-delay: 0s;
-}
-
-.ray-4 {
-  left: 60%;
-  animation-delay: 0s;
-}
-
-.ray-5 {
-  left: 80%;
-  animation-delay: 0s;
-}
-
-.header-ray-1 {
-  left: 15%;
-  animation-delay: 0s;
-}
-
-.header-ray-2 {
-  left: 30%;
-  animation-delay: 0s;
-}
-
-.header-ray-3 {
-  left: 45%;
-  animation-delay: 0s;
-}
-
-.header-ray-4 {
-  left: 65%;
-  animation-delay: 0s;
-}
-
-.header-ray-5 {
-  left: 85%;
-  animation-delay: 0s;
 }
 
 @keyframes ray-rotate {
