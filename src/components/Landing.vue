@@ -72,7 +72,7 @@
         <!-- Countdown Container -->
         <div class="countdown-wrapper">
           <div v-if="showCountdown" class="countdown-container">
-            <div class="countdown-grid">
+            <div class="countdown-grid mb-10">
               <!-- Días -->
               <div class="countdown-card countdown-card--main" style="grid-area: dias;">
                 <div class="text-4xl lg:text-5xl font-bold font-mono">
@@ -116,6 +116,19 @@
               </button>
             </div>
           </div>
+
+          <!-- Coming Soon Component -->
+          <div class="coming-soon-container" v-if="showCountdown">
+            <div class="coming-soon-content">
+              <div class="coming-soon-badge">
+                <span class="coming-soon-text">PRÓXIMAMENTE</span>
+                <div class="coming-soon-glow"></div>
+              </div>
+              <div class="coming-soon-subtitle">
+                El evento más grande de IA universitaria
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -156,7 +169,7 @@ import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-08-30T12:00:00'
+const eventDateTime = '2025-08-05T11:38:00'
 
 // Countdown timer state
 const countdown = ref({

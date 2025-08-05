@@ -114,15 +114,127 @@
           brightness(1.05);
 }
 
+/* Coming Soon Container - RESPONSIVE */
+.coming-soon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: float-gentle 6s ease-in-out infinite;
+  animation-delay: 1.2s;
+  margin-bottom: clamp(20px, 4vw, 40px);
+}
+
+.coming-soon-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2vw, 12px);
+  text-align: center;
+}
+
+.coming-soon-badge {
+  position: relative;
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.15) 0%, rgba(27, 112, 117, 0.08) 100%);
+  border: clamp(2px, 0.5vw, 3px) solid rgba(39, 196, 121, 0.4);
+  border-radius: clamp(20px, 4vw, 30px);
+  padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 
+    0 8px 32px rgba(39, 196, 121, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  animation: coming-soon-pulse 4s ease-in-out infinite;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.coming-soon-badge:hover {
+  background: linear-gradient(135deg, rgba(39, 196, 121, 0.22) 0%, rgba(27, 112, 117, 0.12) 100%);
+  border-color: rgba(39, 196, 121, 0.6);
+  box-shadow: 
+    0 12px 40px rgba(39, 196, 121, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.coming-soon-text {
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+  letter-spacing: 0.1em;
+  color: #27c479;
+  text-shadow: 0 0 15px rgba(39, 196, 121, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.coming-soon-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(39, 196, 121, 0.1),
+    transparent
+  );
+  animation: glow-sweep 3s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+.coming-soon-subtitle {
+  font-family: 'Lexend Deca', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: #ffffff;
+  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  max-width: clamp(200px, 50vw, 300px);
+  line-height: 1.4;
+}
+
+@keyframes coming-soon-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(39, 196, 121, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(39, 196, 121, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 12px 40px rgba(39, 196, 121, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(39, 196, 121, 0.6);
+  }
+}
+
+@keyframes glow-sweep {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
 /* Countdown Wrapper - IMPROVED RESPONSIVE */
 .countdown-wrapper {
   flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: float-gentle 6s ease-in-out infinite;
-  animation-delay: 1.5s;
+  gap: clamp(10px, 2vw, 20px);
   min-width: 0; /* Prevent overflow */
+  margin-top: clamp(20px, 4vw, 80px); /* Espaciado responsive ajustado */
 }
 
 /* IMPROVED RESPONSIVE BREAKPOINTS */
@@ -174,6 +286,7 @@
   .countdown-wrapper {
     order: 2;
     width: 100%;
+    margin-top: clamp(10px, 2vw, 20px) !important; /* Reduce margen en responsive */
   }
   
   .logo-container {
@@ -231,6 +344,28 @@
   
   .content-container {
     gap: clamp(8px, 2vw, 16px);
+  }
+  
+  .countdown-wrapper {
+    margin-top: clamp(5px, 1vw, 15px) !important; /* Margen mínimo en móviles */
+  }
+  
+  .coming-soon-container {
+    margin-bottom: clamp(10px, 2vw, 20px);
+  }
+  
+  .coming-soon-badge {
+    padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 16px);
+    border-radius: clamp(15px, 3vw, 20px);
+  }
+  
+  .coming-soon-text {
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+  }
+  
+  .coming-soon-subtitle {
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    max-width: clamp(180px, 45vw, 250px);
   }
   
   .grid-container {
