@@ -63,8 +63,8 @@
           <div class="description">
             <p class="text-xl lg:text-2xl leading-relaxed max-w-3xl" style="color: #ffffff; opacity: 0.9; text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);">
               Compite con los mejores estudiantes universitarios en desafíos de 
-              inteligencia artificial. Demuestra tus habilidades en machine learning,
-              algoritmos y soluciones innovadoras.
+              inteligencia artificial. Demuestra tus habilidades en agentes de IA,
+              sistemas multi-agentes, RAG y vibe coding.
             </p>
           </div>
         </div>
