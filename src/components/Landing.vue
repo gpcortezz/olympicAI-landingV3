@@ -169,7 +169,7 @@ import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
 // FECHA Y HORA DEL EVENTO (ajusta aquí)
-const eventDateTime = '2025-08-05T11:38:00'
+const eventDateTime = '2025-08-30T12:00:00'
 
 // Countdown timer state
 const countdown = ref({
