@@ -6,22 +6,16 @@
       <div class="container">
         <!-- Left: Hero -->
         <section class="hero">
-          <img :src="newLogoImg" alt="Olimpiadas Universitarias de IA" class="logo" />
-          <h1 class="title text-4xl md:text-5xl lg:text-6xl leading-tight">
+          <img :src="newLogoImg" alt="Olimpiadas Universitarias de IA" class="logo logo-appear" />
+          <h1 class="title title-appear text-4xl md:text-5xl lg:text-6xl leading-tight">
             <span>OLIMPIADAS </span>
             <span class="highlight">UNIVERSITARIAS</span><br />
-            <span>DE </span><span class="highlight">IA</span> <span>2025</span>
+            <span>DE </span> <span class="highlight">IA</span> <span>2025</span>
           </h1>
-          <p class="subtitle text-lg md:text-xl lg:text-2xl leading-relaxed max-w-2xl">
+          <p class="subtitle subtitle-appear text-lg md:text-xl lg:text-2xl leading-relaxed max-w-2xl">
             Compite con los mejores estudiantes en desafíos de IA: agentes, multi-agentes, RAG y vibe coding.
           </p>
-          <div class="cta" v-if="!showCountdown">
-            <a class="cta-button" href="" target="_blank" rel="noopener noreferrer">
-              <span>Visita el sitio oficial</span>
-              <span aria-hidden>→</span>
-            </a>
-          </div>
-          <div v-if="showCountdown" class="badge">PRÓXIMAMENTE</div>
+          <div v-if="showCountdown" :class="['badge badge-appear', { 'fade-out': fadeOutBadge }]">PRÓXIMAMENTE</div>
         </section>
 
         <!-- Right: Countdown -->
@@ -44,6 +38,12 @@
               <div class="label label--seconds">Segundos</div>
             </div>
           </div>
+          <div v-else class="flex items-center justify-center">
+            <a class="cta-button cta-appear" href="" target="_blank" rel="noopener noreferrer">
+              <span>Visita el sitio oficial</span>
+              <span aria-hidden>→</span>
+            </a>
+          </div>
         </section>
       </div>
     </main>
@@ -57,11 +57,12 @@ import '../newLanding.css'
 import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/+esm";
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
-const eventDateTime = '2025-08-30T12:00:00'
+const eventDateTime = '2025-08-07T15:17:20'
 
 const countdown = ref({ days: '10', hours: '00', minutes: '00', seconds: '00' })
 const showCountdown = ref(true)
 const fadeOutCountdown = ref(false)
+const fadeOutBadge = ref(false)
 let fireworksLaunched = false
 let timer = null
 
@@ -87,6 +88,7 @@ const updateCountdown = () => {
     if (!fireworksLaunched) {
       fireworksLaunched = true
       fadeOutCountdown.value = true
+      fadeOutBadge.value = true
       setTimeout(() => { showCountdown.value = false }, 600)
       createFirework()
       const steps = Array.from({ length: 40 }, (_, i) => i * 500)
@@ -125,8 +127,23 @@ const createFirework = () => {
 }
 
 onMounted(async () => {
-  updateCountdown()
-  timer = setInterval(updateCountdown, 1000)
+  // Inicializa lógica como antes: si ya pasó, muestra el botón de inmediato
+  const nowInit = new Date()
+  const targetInit = new Date(eventDateTime)
+  const diffInit = targetInit.getTime() - nowInit.getTime()
+  if (diffInit <= 0) {
+    showCountdown.value = false
+    // Lanza fuegos artificiales si el evento ya pasó al cargar
+    createFirework()
+    const stepsInit = Array.from({ length: 40 }, (_, i) => i * 500)
+    stepsInit.forEach((t) => setTimeout(createFirework, t))
+    setTimeout(() => {
+      document.querySelectorAll('.firework-particle').forEach((fw) => fw.remove())
+    }, 20000)
+  } else {
+    updateCountdown()
+    timer = setInterval(updateCountdown, 1000)
+  }
 
   await loadAll(tsParticles)
   await tsParticles.addPreset('lightdark', {

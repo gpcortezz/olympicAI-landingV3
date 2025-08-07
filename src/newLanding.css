@@ -83,6 +83,25 @@
     filter: drop-shadow(0 0 12px rgba(39, 196, 121, 0.4));
     display: block;
   }
+
+/* Appear animations (CSS-only, lightweight) */
+.logo-appear { animation: riseIn 700ms cubic-bezier(0.2, 0.65, 0.3, 1) 60ms both, breath 7s ease-in-out 760ms infinite; }
+.title-appear span { display: inline-block; }
+.title-appear span { animation: riseIn 700ms cubic-bezier(0.2, 0.65, 0.3, 1) both; }
+.title-appear span:nth-child(1) { animation-delay: 80ms; }
+.title-appear span:nth-child(2) { animation-delay: 140ms; }
+.title-appear br { display: block; }
+.title-appear span:nth-child(4) { animation-delay: 200ms; }
+.title-appear span:nth-child(5) { animation-delay: 240ms; }
+
+.subtitle-appear { animation: riseIn 680ms cubic-bezier(0.2, 0.65, 0.3, 1) 180ms both, breath 8s ease-in-out 900ms infinite !important; }
+.title-appear { animation: breath 7.5s ease-in-out 820ms infinite; }
+.badge-appear { animation: riseIn 600ms cubic-bezier(0.2, 0.65, 0.3, 1) 220ms both; }
+
+@keyframes riseIn {
+  0% { opacity: 0; transform: translateY(16px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
   
   .title {
     margin-top: clamp(12px, 2vw, 20px);
@@ -90,6 +109,7 @@
     letter-spacing: 0.01em;
     color: var(--text);
     text-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+  animation: breath 6s ease-in-out infinite;
   }
   
   .title .highlight {
@@ -101,6 +121,7 @@
     margin-top: clamp(10px, 2vw, 16px);
     color: var(--text);
     opacity: 0.85;
+  animation: breath 8s ease-in-out infinite;
   }
   
   .cta {
@@ -209,6 +230,25 @@
     border-radius: 999px;
     padding: 8px 14px;
   }
+
+/* CTA appear animation */
+.cta-appear {
+  animation: ctaAppear 600ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes ctaAppear {
+  0% { opacity: 0; transform: translateY(14px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Shared breathing keyframes */
+@keyframes breath {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-2px) scale(1.01); opacity: 0.96; }
+}
+
+/* When countdown finished, keep CTA aligned with cards container */
+.flex.items-center.justify-center { margin-top: 0; }
   
   .fade-out { opacity: 0; transform: translateY(-8px) scale(0.98); transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1); }
   
