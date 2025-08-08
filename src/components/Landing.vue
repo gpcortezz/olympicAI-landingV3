@@ -39,7 +39,7 @@
             </div>
           </div>
           <div v-else class="flex items-center justify-center">
-            <a class="cta-button cta-appear" href="" target="_blank" rel="noopener noreferrer">
+            <a class="cta-link cta-appear" href="" target="_blank" rel="noopener noreferrer">
               <span>Visita el sitio oficial</span>
               <span aria-hidden>→</span>
             </a>
@@ -57,7 +57,7 @@ import '../newLanding.css'
 import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/+esm";
 import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.0.3/+esm";
 
-const eventDateTime = '2025-08-30T15:52:20'
+const eventDateTime = '2025-08-08T1:29:30'
 
 const countdown = ref({ days: '10', hours: '00', minutes: '00', seconds: '00' })
 const showCountdown = ref(true)
