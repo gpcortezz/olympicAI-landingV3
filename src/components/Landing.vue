@@ -31,11 +31,11 @@
             </div>
             <div class="time-card">
               <div class="value font-extrabold">{{ countdown.minutes }}</div>
-              <div class="label">Minutos</div>
+              <div class="label">Min</div>
             </div>
             <div class="time-card">
               <div class="value font-extrabold">{{ countdown.seconds }}</div>
-              <div class="label label--seconds">Segundos</div>
+              <div class="label label--seconds">Seg</div>
             </div>
           </div>
           <div v-else class="flex items-center justify-center">

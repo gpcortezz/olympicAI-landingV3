@@ -301,7 +301,9 @@
   .countdown {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(12px, 3vw, 24px);
+    gap: clamp(14px, 4vw, 28px);
+    justify-items: stretch;
+    align-items: stretch;
   }
   
   .time-card {
@@ -309,13 +311,17 @@
     background: linear-gradient(135deg, rgba(39, 196, 121, 0.08), rgba(27, 112, 105, 0.05));
     border: clamp(2px, 0.6vw, 3px) solid rgba(39, 196, 121, 0.5);
     border-radius: clamp(6px, 1.5vw, 9px);
-    padding: clamp(16px, 4vw, 28px) clamp(8px, 2vw, 16px);
+    padding: clamp(18px, 4.5vw, 26px) clamp(10px, 2.5vw, 18px);
     text-align: center;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 8px 32px rgba(39, 196, 121, 0.35), 0 16px 48px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     transition: transform 180ms cubic-bezier(.4,0,.2,1), box-shadow 180ms cubic-bezier(.4,0,.2,1), border-color 180ms ease;
+    width: 100%;
+    min-width: 0;
+    height: clamp(90px, 14vw, 130px);
+    box-sizing: border-box;
   }
   
   .time-card::before {
@@ -339,32 +345,50 @@
   .time-card:nth-child(1) .value { color: var(--primary); text-shadow: 0 0 25px rgba(39, 196, 121, 0.7); }
   .time-card:nth-child(2):hover,
   .time-card:nth-child(4):hover { transform: translateY(-16px) scale(1.03); }
+
+  /* Provide tap feedback on touch devices (hover isn't available) */
+  @media (hover: none) {
+    .time-card:active {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(39, 196, 121, 0.45), 0 16px 40px rgba(0, 0, 0, 0.16);
+    }
+    .time-card:nth-child(2):active,
+    .time-card:nth-child(4):active {
+      transform: translateY(-16px) scale(1.03);
+    }
+  }
   
   .time-card .value {
     font-weight: 800;
     color: var(--text);
     text-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
   }
   
   .time-card .label {
     margin-top: 8px;
     font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: #ffffffb3;
     text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   @media (max-width: 768px) {
-    .countdown { gap: clamp(6px, 2vw, 10px); }
-    .time-card { transition: none; }
-    .time-card:hover { transform: none; box-shadow: 0 2px 8px rgba(39, 196, 121, 0.18); }
+    .countdown { gap: clamp(10px, 3vw, 14px); }
+    .time-card { height: clamp(84px, 22vw, 120px); }
+    .time-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 8px 24px rgba(39, 196, 121, 0.28), 0 12px 28px rgba(0,0,0,0.18); }
   }
 
   /* Tablet: reduce columns and scale text to avoid overflow */
   @media (max-width: 1024px) {
-    .countdown { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .countdown { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
     .time-card { padding: 14px 10px; }
-    .time-card .value { font-size: clamp(1.35rem, 3.2vw, 1.8rem) !important; line-height: 1.2; }
+    .time-card .value { font-size: clamp(1.25rem, 3.2vw, 1.7rem) !important; line-height: 1.2; }
     .time-card .label { font-size: clamp(0.68rem, 1.5vw, 0.85rem) !important; }
   }
 
@@ -376,30 +400,37 @@
   /* Ensure countdown fits on small screens */
   @media (max-width: 640px) {
     .countdown {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
     }
     .time-card {
-      padding: 10px 6px;
+      padding: 10px 8px;
       border-radius: 10px;
+      height: clamp(72px, 24vw, 110px);
     }
   .time-card .value {
-      font-size: clamp(1.15rem, 7vw, 1.55rem) !important;
+      font-size: clamp(0.95rem, 4.8vw, 1.35rem) !important;
       line-height: 1.2;
     }
     .time-card .label {
-      font-size: clamp(0.58rem, 2.8vw, 0.75rem) !important;
+      font-size: clamp(0.46rem, 2vw, 0.64rem) !important;
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .time-card .label--seconds { letter-spacing: 0.04em; }
+    .time-card .label--seconds { letter-spacing: 0.04em; white-space: nowrap; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; }
   }
   
   @media (max-width: 400px) {
-    .countdown { gap: 6px; }
-    .time-card { padding: 8px 4px; }
-    .time-card .value { font-size: clamp(1rem, 7.2vw, 1.25rem) !important; }
-    .time-card .label { font-size: clamp(0.52rem, 2.6vw, 0.7rem) !important; }
-    .time-card .label--seconds { letter-spacing: 0.02em; }
+    .countdown { gap: 10px; }
+    .time-card { padding: 8px 6px; height: clamp(64px, 22vw, 96px); }
+    .time-card .value { font-size: clamp(0.9rem, 4.8vw, 1.1rem) !important; }
+    .time-card .label { font-size: clamp(0.42rem, 1.8vw, 0.58rem) !important; white-space: nowrap; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; }
+    .time-card .label--seconds { letter-spacing: 0.03em; white-space: nowrap; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; }
   }
+
+  /* Keep single-line 4-column layout across all widths */
   
   
   /* Countdown layout fixes: ensure text scales with card and stays centered */
@@ -412,30 +443,35 @@
   }
   .time-card .value {
     /* ensure base scaling also adapts on large screens */
-    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
     line-height: 1.1;
   }
   .time-card .label {
-    font-size: clamp(0.7rem, 1.6vw, 0.9rem);
+    font-size: clamp(0.6rem, 1.4vw, 0.8rem);
     line-height: 1.1;
     max-width: 100%;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .time-card .label--seconds {
-    /* allow wrapping to avoid overflow on narrow cards */
-    white-space: normal;
+    /* prevent vertical stacking of letters */
+    white-space: nowrap;
     letter-spacing: 0.04em;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 0.95em;
   }
   @media (max-width: 640px) {
-    .time-card .value { font-size: clamp(1.1rem, 6.5vw, 1.6rem) !important; }
-    .time-card .label { font-size: clamp(0.6rem, 2.6vw, 0.8rem) !important; }
+    .time-card .value { font-size: clamp(0.95rem, 4.5vw, 1.3rem) !important; }
+    .time-card .label { font-size: clamp(0.5rem, 2vw, 0.7rem) !important; }
     .time-card .label--seconds { letter-spacing: 0.03em; }
   }
   @media (max-width: 400px) {
-    .time-card .value { font-size: clamp(1rem, 7vw, 1.3rem) !important; }
-    .time-card .label { font-size: clamp(0.52rem, 2.8vw, 0.7rem) !important; }
+    .time-card .value { font-size: clamp(0.9rem, 5vw, 1.1rem) !important; }
+    .time-card .label { font-size: clamp(0.46rem, 2vw, 0.62rem) !important; }
     .time-card .label--seconds { letter-spacing: 0.02em; }
   }
   
