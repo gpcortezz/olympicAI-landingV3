@@ -289,6 +289,15 @@
     50% { box-shadow: 0 0 8px currentColor, 0 0 12px currentColor; }
     100% { box-shadow: 0 0 4px currentColor; }
   }
+
+  /* Smooth wave animation */
+  @keyframes timecard-wave {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-8px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(8px); }
+    100% { transform: translateY(0); }
+  }
   
   .landing main {
     min-height: 100vh;
@@ -304,6 +313,18 @@
     gap: clamp(14px, 4vw, 28px);
     justify-items: stretch;
     align-items: stretch;
+  }
+  /* Apply bobbing sequence only on desktop */
+  @media (min-width: 1025px) {
+    .countdown .time-card {
+      animation: timecard-wave 4.8s ease-in-out infinite;
+      animation-play-state: running;
+    }
+    .countdown .time-card:nth-child(1) { animation-delay: 0s; }
+    .countdown .time-card:nth-child(2) { animation-delay: 0.4s; }
+    .countdown .time-card:nth-child(3) { animation-delay: 0.8s; }
+    .countdown .time-card:nth-child(4) { animation-delay: 1.2s; }
+    .countdown .time-card:hover { animation-play-state: paused; }
   }
   
   .time-card {
